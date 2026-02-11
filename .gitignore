@@ -22,6 +22,33 @@ target/
 .springBeans
 .sts4-cache
 
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+
+# Build output / compiled files
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Logs
+[Ll]og/
+[Ll]ogs/
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -35,5 +62,23 @@ build/
 ### VS Code ###
 .vscode/
 
+*.log
+
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+*.tmp
+*.bak
+*.swp
+*~
+
+.env
+*.local
+
+surefire-reports/
+failsafe-reports/
+
 ### Mac OS ###
 .DS_Store
+._*

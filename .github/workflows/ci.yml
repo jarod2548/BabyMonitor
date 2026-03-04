@@ -30,10 +30,8 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+      - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/babymonitor:latest
 
       - name: Push Docker image
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: docker push ${{ secrets.DOCKER_USERNAME }}/babymonitor:latest

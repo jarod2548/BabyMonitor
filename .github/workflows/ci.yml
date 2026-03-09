@@ -27,7 +27,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           username: BabyMonitor
-          password: IkHaatDocker1
+          password: IkHaatDocker1!
 
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/babymonitor:latest

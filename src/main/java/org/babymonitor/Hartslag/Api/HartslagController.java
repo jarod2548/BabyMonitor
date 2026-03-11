@@ -1,4 +1,4 @@
-package Hartslag.Api;
+package org.babymonitor.Hartslag.Api;
 
 import org.springframework.web.bind.annotation.RestController;
 

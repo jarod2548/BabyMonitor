@@ -1,5 +1,6 @@
-package connection.websocket;
+package org.babymonitor.connection.websocket;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -19,7 +20,12 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/connection");
-        registry.addEndpoint("/connection").withSockJS();
+        registry.addEndpoint("/connection")   // ✅ this is the correct URL path
+                .setAllowedOriginPatterns("*")
+                .withSockJS();
+    }
+    @PostConstruct
+    public void init() {
+        System.out.println("WEBSOCKET CONFIG LOADED");
     }
 }

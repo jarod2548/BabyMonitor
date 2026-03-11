@@ -1,8 +1,11 @@
-package connection.service;
+package org.babymonitor.connection.service;
+
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+@Service
 public class ConnectionService {
     private final Map<String, Set<String>> groepSessies = new ConcurrentHashMap<>();
 

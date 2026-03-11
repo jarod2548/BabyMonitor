@@ -1,7 +1,7 @@
 services:
   backend:
     build: .
-    container_name: Baby_Monitor_Backend
+    container_name: Baby-Monitor-Backend
     ports:
       - "8080:8080"
     networks:

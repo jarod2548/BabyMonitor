@@ -1,7 +1,7 @@
-package org.babymonitor.api;
+package org.babymonitor.Hartslag.Api;
 
 import org.babymonitor.model.DefaultHartslag;
-import org.babymonitor.service.HartslagService;
+import org.babymonitor.Hartslag.Service.HartslagService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

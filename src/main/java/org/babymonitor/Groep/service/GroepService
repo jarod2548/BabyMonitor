@@ -1,18 +1,23 @@
-package org.babymonitor.groep.service;
-
-import org.babymonitor.groep.model.Groep;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
-
 @Service
 public class GroepService {
 
-    private final Map<String, Groep> groepen = new HashMap<>();
+    private final ConnectionService connectionService;
 
-    public List<Groep> getAlleGroepen() {
-        return new ArrayList<>(groepen.values());
+    public GroepService(ConnectionService connectionService) {
+        this.connectionService = connectionService;
     }
 
+    public List<Groep> getAlleGroepen() {
+        List<Groep> groepen = new ArrayList<>();
+
+        for (String groepID : connectionService.getGroepIds()) {
+            groepen.add(new Groep(
+                groepID,
+                "Groep " + groepID.substring(0, 5),
+                "Instructeur A"
+            ));
+        }
+
+        return groepen;
     }
 }

@@ -1,4 +1,4 @@
-package org.babymonitor.service;
+package org.babymonitor.Hartslag.Service;
 
 import org.babymonitor.model.DefaultHartslag;
 import org.springframework.scheduling.annotation.Scheduled;

@@ -1,4 +1,4 @@
-package org.babymonitor.model;
+package org.babymonitor.Hartslag.Model;
 
 public class Hartslag{
 

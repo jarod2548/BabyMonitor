@@ -82,3 +82,7 @@ failsafe-reports/
 ### Mac OS ###
 .DS_Store
 ._*
+
+
+
+oracleJdk-*/

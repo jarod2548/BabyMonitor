@@ -1,0 +1,15 @@
+package org.babymonitor.groep.model;
+
+public class Groep {
+
+    private String id;
+    private String naam;
+
+    public Groep(String id, String naam) {
+        this.id = id;
+        this.naam = naam;
+    }
+
+    public String getId() { return id; }
+    public String getNaam() { return naam; }
+}

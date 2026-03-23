@@ -1,9 +1,12 @@
 package org.babymonitor.connection.service;
 
-import org.springframework.stereotype.Service;
-
-import java.util.*;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class ConnectionService {
@@ -24,11 +27,14 @@ public class ConnectionService {
         return groepID;
     }
 
-    public void verwijderVanGroep(String groepID, String sessieID){
+    public void verwijderVanGroep(String groepID, String sessieID) {
         Set<String> sessies = groepSessies.get(groepID);
-        if(sessies != null){
+        if (sessies != null) {
             sessies.remove(sessieID);
         }
     }
-
+    
+    public Set<String> getGroepIds() {
+        return groepSessies.keySet();
+    }
 }

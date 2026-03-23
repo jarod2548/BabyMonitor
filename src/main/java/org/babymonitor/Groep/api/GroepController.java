@@ -23,10 +23,7 @@ public class GroepController {
 
     @PostMapping
     public Groep maakGroep(@RequestBody MaakGroepRequest request) {
-        return groepService.maakGroep(request.naam());
+        return groepService.maakGroep(request.getNaam());
     }
 
-    public record MaakGroepRequest(String naam) {
-    }
 }
-//push test

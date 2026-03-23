@@ -2,14 +2,17 @@ package org.babymonitor.groep.model;
 
 public class Groep {
 
-    private String id;
+    private String groepID;
     private String naam;
+    private String eigenaar;
 
-    public Groep(String id, String naam) {
-        this.id = id;
+    public Groep(String groepID, String naam, String eigenaar) {
+        this.groepID = groepID;
         this.naam = naam;
+        this.eigenaar = eigenaar;
     }
 
-    public String getId() { return id; }
+    public String getGroepID() { return groepID; }
     public String getNaam() { return naam; }
+    public String getEigenaar() { return eigenaar; }
 }

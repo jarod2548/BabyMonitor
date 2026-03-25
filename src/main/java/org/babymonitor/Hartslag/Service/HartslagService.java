@@ -1,6 +1,6 @@
 package org.babymonitor.Hartslag.Service;
 
-import org.babymonitor.model.DefaultHartslag;
+import org.babymonitor.Hartslag.Model.Hartslag;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +13,11 @@ import java.util.Random;
 @Service
 public class HartslagService {
 
-    private final List<DefaultHartslag> metingen = new ArrayList<>();
+    private final List<Hartslag> metingen = new ArrayList<>();
     private final Random random = new Random();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-    public List<DefaultHartslag> haalAlleMetingen() {
+    public List<Hartslag> haalAlleMetingen() {
         return metingen;
     }
 
@@ -35,6 +35,6 @@ public class HartslagService {
             status = "NORMAAL";
         }
 
-        metingen.add(new DefaultHartslag(bpm, tijd, status));
+        metingen.add(new Hartslag(bpm, tijd, status));
     }
 }

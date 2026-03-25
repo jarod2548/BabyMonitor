@@ -1,6 +1,7 @@
 package org.babymonitor.Hartslag.Api;
 
-import org.babymonitor.model.DefaultHartslag;
+
+import org.babymonitor.Hartslag.Model.Hartslag;
 import org.babymonitor.Hartslag.Service.HartslagService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class HartslagController {
     }
 
     @GetMapping
-    public List<DefaultHartslag> haalHartslagOp() {
+    public List<Hartslag> haalHartslagOp() {
         return service.haalAlleMetingen();
     }
 }

@@ -34,4 +34,9 @@ public class GroepService {
     public Set<String> getAlleGroepIds() {
         return groepen.keySet();
     }
+
+    public Groep joinGroep(String groepId) {
+        Groep groep = groepen.get(groepId);
+        return groep;
+    }
 }

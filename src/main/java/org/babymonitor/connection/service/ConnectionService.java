@@ -10,10 +10,12 @@ import java.util.Set;
 
 @Service
 public class ConnectionService {
-
+    private final ConcurrentMap<String, Set<String>> groepSessies = new ConcurrentHashMap<>();
     private final GroepService groepService;
+
 
     public ConnectionService(GroepService groepService) {
         this.groepService = groepService;
     }
+
 }

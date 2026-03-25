@@ -4,12 +4,10 @@ public class Hartslag{
 
     private int bpm;
     private String tijd;
-    private String status;
 
-    public Hartslag(int Bpm, String Tijd, String Status) {
+    public Hartslag(int Bpm, String Tijd) {
         bpm = Bpm;
         tijd = Tijd;
-        status = Status;
     }
 
     public int getBpm() {

@@ -21,25 +21,13 @@ public class GroepService {
 
     public Groep maakGroep(String naam) {
         String groepId = UUID.randomUUID().toString();
-        String groepNaam = (naam == null || naam.isBlank()) ? "Groep X " : naam;
-
-        // 
-        Groep groep = new Groep(groepId, groepNaam, "Instructeur A");
-
+        String groepNaam = (naam == null || naam.isBlank()) ? "Groep X ": naam;
+        Groep groep = new Groep(groepId, groepNaam, "");
         groepen.put(groepId, groep);
         return groep;
     }
 
     public boolean bestaatGroep(String groepId) {
         return groepen.containsKey(groepId);
-    }
-
-    public Set<String> getAlleGroepIds() {
-        return groepen.keySet();
-    }
-
-    public Groep joinGroep(String groepId) {
-        Groep groep = groepen.get(groepId);
-        return groep;
     }
 }

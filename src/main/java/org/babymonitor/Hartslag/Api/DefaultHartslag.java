@@ -1,4 +1,4 @@
-package org.babymonitor.model;
+package org.babymonitor.Hartslag.Api;
 
 public class DefaultHartslag{
 

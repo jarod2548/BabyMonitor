@@ -1,40 +1,19 @@
 package org.babymonitor.connection.service;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-
+import org.babymonitor.Groep.model.Groep;
+import org.babymonitor.Groep.service.GroepService;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.Set;
 
 @Service
 public class ConnectionService {
-    private final Map<String, Set<String>> groepSessies = new ConcurrentHashMap<>();
 
-    public void voegToeAanGroep(String groepID, String sessieID){
-        Set<String> sessies = groepSessies.get(groepID);
-        if(sessies != null){
-            sessies.add(sessieID);
-        }
-    }
+    private final GroepService groepService;
 
-    public String maakGroepSessie(String sessieID){
-        String groepID = UUID.randomUUID().toString();
-        Set<String> nieuweSessies = new HashSet<>();
-        nieuweSessies.add(sessieID);
-        groepSessies.put(groepID, nieuweSessies);
-        return groepID;
-    }
-
-    public void verwijderVanGroep(String groepID, String sessieID) {
-        Set<String> sessies = groepSessies.get(groepID);
-        if (sessies != null) {
-            sessies.remove(sessieID);
-        }
-    }
-    
-    public Set<String> getGroepIds() {
-        return groepSessies.keySet();
+    public ConnectionService(GroepService groepService) {
+        this.groepService = groepService;
     }
 }

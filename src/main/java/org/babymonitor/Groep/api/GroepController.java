@@ -1,7 +1,7 @@
-package org.babymonitor.groep.api;
+package org.babymonitor.Groep.api;
 
-import org.babymonitor.groep.model.Groep;
-import org.babymonitor.groep.service.GroepService;
+import org.babymonitor.Groep.model.Groep;
+import org.babymonitor.Groep.service.GroepService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,4 +20,10 @@ public class GroepController {
     public List<Groep> getAlleGroepen() {
         return groepService.getAlleGroepen();
     }
+
+    @PostMapping
+    public Groep maakGroep(@RequestBody MaakGroepRequest request) {
+        return groepService.maakGroep(request.getNaam());
+    }
+
 }

@@ -30,8 +30,4 @@ public class GroepService {
     public boolean bestaatGroep(String groepId) {
         return groepen.containsKey(groepId);
     }
-
-    public Set<String> getAlleGroepIds() {
-        return groepen.keySet();
-    }
 }

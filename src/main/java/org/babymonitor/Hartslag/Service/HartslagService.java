@@ -17,24 +17,55 @@ public class HartslagService {
     private final Random random = new Random();
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
+    private final int beginHartslag = 140;
+    private int huidigeHartslag = 140;
+    private final int variabiliteit = 20;
+
     public List<Hartslag> haalAlleMetingen() {
-        return metingen;
+        return new ArrayList<>(metingen);
+    }
+
+    private int berekenVerandering(int huidige, int minBpm, int maxBpm, int[] stappen) {
+
+        double positie = (huidige - minBpm) / (double) (maxBpm - minBpm);
+
+        double kansOmhoog = 0.85 - 0.70 * positie;
+
+        boolean omhoog = random.nextDouble() < kansOmhoog;
+
+        int grootte = stappen[random.nextInt(stappen.length)];
+
+        if (omhoog) {
+            return Math.abs(grootte);
+        } else {
+            return -Math.abs(grootte);
+        }
     }
 
     @Scheduled(fixedRate = 1000)
-    public void maakNieuweAutomatischeHartslag() {
-        int bpm = 90 + random.nextInt(90);
-        String tijd = LocalTime.now().format(formatter);
+    public void maakNieuweHartslag() {
 
-        String status;
-        if (bpm < 110) {
-            status = "LAAG";
-        } else if (bpm > 160) {
-            status = "HOOG";
-        } else {
-            status = "NORMAAL";
+        int[] stappen = {2, 4, 6};
+
+        int minBpm = beginHartslag - variabiliteit;
+        int maxBpm = beginHartslag + variabiliteit;
+
+        int verandering = berekenVerandering(huidigeHartslag, minBpm, maxBpm, stappen);
+
+        int nieuweHartslag = huidigeHartslag + verandering;
+
+        if (nieuweHartslag < minBpm) {
+            nieuweHartslag = minBpm;
         }
 
-        metingen.add(new Hartslag(bpm, tijd, status));
+        if (nieuweHartslag > maxBpm) {
+            nieuweHartslag = maxBpm;
+        }
+
+        huidigeHartslag = nieuweHartslag;
+
+        String tijd = LocalTime.now().format(formatter);
+
+        metingen.add(new Hartslag(huidigeHartslag, tijd));
     }
 }

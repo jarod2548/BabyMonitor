@@ -20,7 +20,4 @@ public class Hartslag{
         return tijd;
     }
 
-    public String getStatus() {
-        return status;
-    }
 }

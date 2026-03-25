@@ -4,13 +4,15 @@ public class Groep {
 
     private String id;
     private String naam;
+    private String instructeur; 
 
     public Groep() {
     }
 
-    public Groep(String id, String naam) {
+    public Groep(String id, String naam, String instructeur) { 
         this.id = id;
         this.naam = naam;
+        this.instructeur = instructeur;
     }
 
     public String getId() {
@@ -28,5 +30,12 @@ public class Groep {
     public void setNaam(String naam) {
         this.naam = naam;
     }
+
+    public String getInstructeur() { 
+        return instructeur;
+    }
+
+    public void setInstructeur(String instructeur) { 
+        this.instructeur = instructeur;
+    }
 }
-//push test

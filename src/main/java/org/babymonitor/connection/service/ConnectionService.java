@@ -36,11 +36,8 @@ public class ConnectionService {
         return groep.getId();
     }
 
-    public void verwijderVanGroep(String groepID, String sessieID){
-        Set<String> sessies = groepSessies.get(groepID);
-        if(sessies != null){
-            sessies.remove(sessieID);
-        }
+    public ConnectionService(GroepService groepService) {
+        this.groepService = groepService;
     }
 
 }

@@ -1,12 +1,12 @@
-package org.babymonitor.Hartslag.Model;
+package org.babymonitor.Hartslag.Api;
 
-public class Hartslag{
+public class DefaultHartslag{
 
     private int bpm;
     private String tijd;
     private String status;
 
-    public Hartslag(int Bpm, String Tijd, String Status) {
+    public DefaultHartslag(int Bpm, String Tijd, String Status) {
         bpm = Bpm;
         tijd = Tijd;
         status = Status;
@@ -20,4 +20,7 @@ public class Hartslag{
         return tijd;
     }
 
+    public String getStatus() {
+        return status;
+    }
 }

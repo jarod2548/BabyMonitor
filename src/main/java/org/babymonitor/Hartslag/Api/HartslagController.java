@@ -1,5 +1,6 @@
 package org.babymonitor.Hartslag.Api;
 
+
 import org.babymonitor.Hartslag.Model.Hartslag;
 import org.babymonitor.Hartslag.Service.HartslagService;
 import org.springframework.web.bind.annotation.CrossOrigin;

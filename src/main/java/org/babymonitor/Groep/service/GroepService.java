@@ -21,8 +21,11 @@ public class GroepService {
 
     public Groep maakGroep(String naam) {
         String groepId = UUID.randomUUID().toString();
-        String groepNaam = (naam == null || naam.isBlank()) ? "Groep X ": naam;
-        Groep groep = new Groep(groepId, groepNaam);
+        String groepNaam = (naam == null || naam.isBlank()) ? "Groep X " : naam;
+
+        // 
+        Groep groep = new Groep(groepId, groepNaam, "Instructeur A");
+
         groepen.put(groepId, groep);
         return groep;
     }

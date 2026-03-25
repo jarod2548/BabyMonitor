@@ -1,13 +1,14 @@
 package org.babymonitor.Groep.service;
 
+import org.babymonitor.Groep.model.Groep;
+import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.babymonitor.Groep.model.Groep;
-import org.springframework.stereotype.Service;
 
 @Service
 public class GroepService {
@@ -31,5 +32,14 @@ public class GroepService {
 
     public boolean bestaatGroep(String groepId) {
         return groepen.containsKey(groepId);
+    }
+
+    public Set<String> getAlleGroepIds() {
+        return groepen.keySet();
+    }
+
+    public Groep joinGroep(String groepId) {
+        Groep groep = groepen.get(groepId);
+        return groep;
     }
 }

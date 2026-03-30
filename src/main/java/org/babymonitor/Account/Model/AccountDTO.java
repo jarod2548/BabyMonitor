@@ -1,29 +1,24 @@
 package org.babymonitor.Account.Model;
 
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.*;
 
-// =========DBO/Entity======//
-@Entity
-@Table(name = "account")
-public class Account {
+// =========DTO=============//
+public class AccountDTO {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
+    @NotNull
     private String username;
 
+    @NotNull
     private String email;
 
+    @NotNull
     private String password;
 
+    @NotNull
     private String roles;
 
     // standard constructor
-    public Account(String name, String mail, String pswrd, String role) {
+    public AccountDTO(String name, String mail, String pswrd, String role) {
         username = name;
         email = mail;
         password = pswrd;
@@ -60,4 +55,7 @@ public class Account {
         return roles;
     }
 
+    public Account convert() {
+        return new Account(this.username, this.email, this.password, this.roles);
+    }
 }

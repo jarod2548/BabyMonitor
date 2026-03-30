@@ -14,13 +14,13 @@ jobs:
       postgres:
         image: postgres:18
         env:
-          POSTGRES_USER: Jarod
-          POSTGRES_PASSWORD: Konijnenberg
-          POSTGRES_DB: financialapp
+          POSTGRES_USER: BabyMonitor
+          POSTGRES_PASSWORD: N8v$3xQp!7rLzB2w
+          POSTGRES_DB: babymonitor
         ports:
           - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U Jarod -d financialapp"
+          --health-cmd "pg_isready -U BabyMonitor -d babymonitor"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5

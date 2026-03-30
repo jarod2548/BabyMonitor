@@ -1,8 +1,6 @@
 package org.babymonitor.Account.Model;// ==========DTO============//
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 // =========DBO/Entity======//
 @Entity
@@ -10,13 +8,20 @@ import jakarta.persistence.Table;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(name = "naam")
     private String username;
-
+    @Column(name = "email")
     private String email;
-
+    @Column(name = "wachtwoord")
     private String password;
+    @Column(name = "rol")
+    private String rol;
+
+    public Account() {
+        // REQUIRED
+    }
 
     // standard constructor
     public Account(String name, String mail, String pswrd) {

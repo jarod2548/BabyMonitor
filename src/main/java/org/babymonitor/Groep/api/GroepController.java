@@ -26,15 +26,15 @@ public class GroepController {
         return groepService.maakGroep(request.getNaam());
     }
 
-   // @PostMapping("/join")
-   // public JoinGroepResponse joinGroep(@RequestBody JoinGroepRequest request) {
-   //     Groep groep = groepService.joinGroep(request.getGroepId());
-//
-   //     return new JoinGroepResponse(
-   //             "Groep succesvol gejoint",
-   //             groep.getId(),
-   //             groep.getNaam()
-   //     );
-   // }
+    @PostMapping("/join")
+    public JoinGroepResponse joinGroep(@RequestBody JoinGroepRequest request) {
+        Groep groep = groepService.joinGroep(request.getGroepId());
+
+        return new JoinGroepResponse(
+                "Groep succesvol gejoint",
+                groep.getId(),
+                groep.getNaam()
+        );
+    }
 
 }

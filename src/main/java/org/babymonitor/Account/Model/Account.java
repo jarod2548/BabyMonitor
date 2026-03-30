@@ -1,8 +1,9 @@
-package org.babymonitor.Account.Model;// ==========DTO============//
+package org.babymonitor.Account.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+// ==========DTO============//
+
+
 
 // =========DBO/Entity======//
 @Entity
@@ -10,6 +11,7 @@ import jakarta.persistence.Table;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String username;
@@ -17,12 +19,18 @@ public class Account {
     private String email;
 
     private String password;
+    private String Role;
 
     // standard constructor
-    public Account(String name, String mail, String pswrd) {
+    public Account(String name, String mail, String pswrd, String role) {
         username = name;
         email = mail;
         password = pswrd;
+        Role = role;
+    }
+
+    public Account() {
+
     }
 
     // setters
@@ -37,6 +45,7 @@ public class Account {
     public void SetPassword(String pswrd) {
         password = pswrd;
     }
+    public void SetRol(String role){Role = role;}
 
     // getters
     public String GetUsername() {
@@ -46,5 +55,11 @@ public class Account {
     public String GetEmail() {
         return email;
     }
+
+    public String GetPassword() {
+        return password;
+    }
+
+    public String GetRol(){return Role;}
 
 }

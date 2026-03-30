@@ -2,8 +2,9 @@ package org.babymonitor.Account.Repository;
 
 import org.babymonitor.Account.Model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.Optional;
+
 public interface AccountRepository extends JpaRepository<Account, Long> {
+    Optional<Account> findByUsername(String username);
 }

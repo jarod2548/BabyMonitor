@@ -52,4 +52,6 @@ public class Account {
         return email;
     }
 
+    public String GetPassword(){return password;}
+
 }

@@ -36,8 +36,5 @@ public class ConnectionService {
         return groep.getId();
     }
 
-    public ConnectionService(GroepService groepService) {
-        this.groepService = groepService;
-    }
 
 }

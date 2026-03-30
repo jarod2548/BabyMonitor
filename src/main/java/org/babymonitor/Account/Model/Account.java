@@ -1,4 +1,8 @@
-// ==========DTO============//
+package org.babymonitor.Account.Model;// ==========DTO============//
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 // =========DBO/Entity======//
 @Entity

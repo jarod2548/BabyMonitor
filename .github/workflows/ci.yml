@@ -10,8 +10,31 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_USER: Jarod
+          POSTGRES_PASSWORD: Konijnenberg
+          POSTGRES_DB: financialapp
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U Jarod -d financialapp"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+
     steps:
       - uses: actions/checkout@v4
+
+      - name: Wait for Postgres to be healthy
+        run: |
+            until [ "$(docker inspect --format='{{.State.Health.Status}}' $(docker ps -q --filter "ancestor=postgres:18"))" = "healthy" ]; do
+              echo "Waiting for Postgres to be healthy..."
+              sleep 2
+            done
 
       - name: Set up Java
         uses: actions/setup-java@v4

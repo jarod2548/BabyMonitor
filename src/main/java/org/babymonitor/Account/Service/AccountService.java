@@ -10,11 +10,14 @@ public class AccountService {
 
     private AccountRepo repository;
 
-    public AccountService (AccountRepo Repo){
-        repository = Repo;
+    public Account createAccount(Account account) {
+        account.setPassword(hashpassword(account.getpassword()));
+        return repository.save(account);
     }
 
-    public Account createAccount(Account account) {
-        return repository.save(account);
+    public String hashpassword(String password) {
+        PasswordEncoder encoder = new Argon2PasswordEncoder(16, 32, 1, 1 << 14, 3);
+        return encoder.encode(password);
+
     }
 }

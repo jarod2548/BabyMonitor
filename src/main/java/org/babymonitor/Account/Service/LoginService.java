@@ -17,10 +17,10 @@ public class LoginService {
     }
 
     public Account login(Account model) {
-        Account account = accountRepository.findByUsername(model.GetUsername())
+        Account account = accountRepository.findByUsername(model.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!account.GetPassword().equals(model.GetPassword())) {
+        if (!account.getPassword().equals(model.getPassword())) {
             throw new RuntimeException("Invalid password");
         }
 

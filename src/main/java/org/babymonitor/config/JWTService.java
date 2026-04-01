@@ -23,8 +23,8 @@ public class JWTService {
     public String generateToken(Account model) {
 
         return Jwts.builder()
-                .setSubject(model.GetUsername())
-                .claim("role", model.GetRole())
+                .setSubject(model.getUsername())
+                .claim("role", model.getRole())
                 .claim("ID", model.getId())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))

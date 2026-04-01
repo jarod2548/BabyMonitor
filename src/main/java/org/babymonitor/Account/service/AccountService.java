@@ -1,16 +1,17 @@
-package org.babymonitor.Account.Service;
+package org.babymonitor.Account.service;
 
-import org.babymonitor.Account.Model.Account;
-import org.babymonitor.Account.repo.AccountRepo;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
+import org.babymonitor.Account.model.Account;
+import org.babymonitor.Account.repository.AccountRepository;
 
-
-@Service
 public class AccountService {
 
-    private AccountRepo repository;
+    private final AccountRepository repository;
+
+    public AccountService(AccountRepository accountRepository) {
+        this.repository = accountRepository;
+    }
 
     public Account createAccount(Account account) {
         account.setPassword(hashpassword(account.getPassword()));

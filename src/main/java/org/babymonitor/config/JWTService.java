@@ -4,7 +4,7 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.babymonitor.Account.Model.Account;
+import org.babymonitor.Account.model.Account;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -13,12 +13,13 @@ import java.util.Date;
 @Service
 public class JWTService {
     private String jwtSecret = "yQ9Zt5rYH9g4e2jTQfK8fN0+V7kW3s5xZp6yVb1cTnE=";
+
     SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-    long expiration = 3600000;
 
+    long expiration = 3600000;
 
     public String generateToken(Account model) {
 

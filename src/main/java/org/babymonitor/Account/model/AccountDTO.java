@@ -1,4 +1,4 @@
-package org.babymonitor.Account.Model;
+package org.babymonitor.Account.model;
 
 import jakarta.validation.constraints.*;
 
@@ -38,7 +38,7 @@ public class AccountDTO {
         password = pswrd;
     }
 
-    public void setRoles(String role) {
+    public void setRole(String role) {
         roles = role;
     }
 
@@ -47,15 +47,11 @@ public class AccountDTO {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public String getRoles() {
+    public String getRole() {
         return roles;
     }
 

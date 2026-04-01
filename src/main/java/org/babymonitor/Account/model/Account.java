@@ -1,4 +1,4 @@
-package org.babymonitor.Account.Model;
+package org.babymonitor.Account.model;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -60,7 +60,7 @@ public class Account {
         return roles;
     }
 
-    public String getpassword() {
+    public String getPassword() {
         return password;
     }
 

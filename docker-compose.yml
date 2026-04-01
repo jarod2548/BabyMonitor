@@ -10,6 +10,8 @@ services:
       POSTGRES_USER: BabyMonitor
       POSTGRES_PASSWORD: N8v$3xQp!7rLzB2w
       POSTGRES_DB: babymonitor
+    networks:
+      - babymonitor-net
     volumes:
       - babymonitorData:/var/lib/postgresql
     ports:

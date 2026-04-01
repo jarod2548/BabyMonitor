@@ -16,19 +16,14 @@ public class LoginService {
         this.accountRepository = accountRepository;
     }
 
-    public String login(LoginDTO loginDTO) {
-        Optional<Account> accountOptional = accountRepository.findByUsername(loginDTO.getUsername());
+    public Account login(Account model) {
+        Account account = accountRepository.findByUsername(model.GetUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (accountOptional.isEmpty()) {
-            return "Gebruiker niet gevonden";
+        if (!account.GetPassword().equals(model.GetPassword())) {
+            throw new RuntimeException("Invalid password");
         }
 
-        Account account = accountOptional.get();
-
-        if (!account.GetPassword().equals(loginDTO.getPassword())) {
-            return "Wachtwoord is onjuist";
-        }
-
-        return "Login gelukt";
+        return account;
     }
 }

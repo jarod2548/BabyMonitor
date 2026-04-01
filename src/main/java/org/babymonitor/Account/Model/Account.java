@@ -7,18 +7,24 @@ import jakarta.persistence.Table;
 
 // =========DBO/Entity======//
 @Entity
-@Table(name = "account")
+@Table(name = "users")
 public class Account {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    @Column(name = "naam")
     private String username;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "wachtwoord")
     private String password;
+
+    @Column(name = "rol")
+    private String roles;
 
     private String roles;
 
@@ -28,6 +34,11 @@ public class Account {
         email = mail;
         password = pswrd;
         roles = role;
+    }
+
+    public Account(String name, String password){
+        username = name;
+        this.password = password;
     }
 
     // setters
@@ -48,6 +59,10 @@ public class Account {
     }
 
     // getters
+    public Long getID(){
+      return id;
+    }
+  
     public String getUsername() {
         return username;
     }

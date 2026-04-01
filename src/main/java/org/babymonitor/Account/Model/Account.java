@@ -31,33 +31,37 @@ public class Account {
     }
 
     // setters
-    public void SetUsername(String name) {
+    public void setUsername(String name) {
         username = name;
     }
 
-    public void SetEmail(String mail) {
+    public void setEmail(String mail) {
         email = mail;
     }
 
-    public void SetPassword(String pswrd) {
+    public void setPassword(String pswrd) {
         password = pswrd;
     }
 
-    public void SetRole(String role) {
+    public void setRole(String role) {
         roles = role;
     }
 
     // getters
-    public String GetUsername() {
+    public String getUsername() {
         return username;
     }
 
-    public String GetEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public String GetRole() {
+    public String getRole() {
         return roles;
+    }
+
+    public String getpassword() {
+        return password;
     }
 
 }

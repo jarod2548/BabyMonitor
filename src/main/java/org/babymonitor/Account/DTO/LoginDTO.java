@@ -1,5 +1,7 @@
 package org.babymonitor.Account.DTO;
 
+import org.babymonitor.Account.Model.Account;
+
 public class LoginDTO {
     private String username;
     private String password;
@@ -14,4 +16,11 @@ public class LoginDTO {
         username = Username;
         password = Password;
     }
+
+    public LoginDTO() { }
+
+    public Account convert(){
+        return new Account(username, password);
+    }
+
 }

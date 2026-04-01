@@ -1,7 +1,5 @@
 package org.babymonitor.Account.Model;
 
-package org.babymonitor.Account.Model;// ==========DTO============//
-
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -9,7 +7,7 @@ import jakarta.persistence.Table;
 
 // =========DBO/Entity======//
 @Entity
-@Table(name = "account")
+@Table(name = "users")
 public class Account {
 
     @Id
@@ -40,6 +38,11 @@ public class Account {
         roles = role;
     }
 
+    public Account(String name, String password){
+        username = name;
+        this.password = password;
+    }
+
     // setters
     public void SetUsername(String name) {
         username = name;
@@ -64,6 +67,10 @@ public class Account {
 
     public String GetEmail() {
         return email;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String GetRole() {

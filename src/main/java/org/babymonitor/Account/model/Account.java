@@ -48,6 +48,10 @@ public class Account {
     }
 
     // getters
+    public long getId() {
+        return id;
+    }
+
     public String getUsername() {
         return username;
     }

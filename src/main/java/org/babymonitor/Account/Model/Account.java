@@ -26,7 +26,6 @@ public class Account {
     @Column(name = "rol")
     private String roles;
 
-    private String roles;
 
     // standard constructor
     public Account(String name, String mail, String pswrd, String role) {
@@ -59,7 +58,7 @@ public class Account {
     }
 
     // getters
-    public Long getID(){
+    public Long getId(){
       return id;
     }
   
@@ -75,7 +74,7 @@ public class Account {
         return roles;
     }
 
-    public String getpassword() {
+    public String getPassword() {
         return password;
     }
 

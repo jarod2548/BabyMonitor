@@ -1,13 +1,10 @@
-package org.babymonitor.Account.model;
+package org.babymonitor.Account.Model;// ==========DTO============//
 
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 // =========DBO/Entity======//
 @Entity
-@Table(name = "users")
+@Table(name = "account")
 public class Account {
 
     @Id
@@ -20,60 +17,41 @@ public class Account {
     @Column(name = "wachtwoord")
     private String password;
     @Column(name = "rol")
-    private String roles;
+    private String rol;
+
+    public Account() {
+        // REQUIRED
+    }
 
     // standard constructor
-    public Account(String name, String mail, String pswrd, String role) {
+    public Account(String name, String mail, String pswrd) {
         username = name;
         email = mail;
         password = pswrd;
-        roles = role;
     }
-
-    public Account(String name, String password){
-        username = name;
-        this.password = password;
-    }
-
-    public Account(){}
-
 
     // setters
-    public void setUsername(String name) {
+    public void SetUsername(String name) {
         username = name;
     }
 
-    public void setEmail(String mail) {
+    public void SetEmail(String mail) {
         email = mail;
     }
 
-    public void setPassword(String pswrd) {
+    public void SetPassword(String pswrd) {
         password = pswrd;
-    }
-
-    public void setRole(String role) {
-        roles = role;
     }
 
     // getters
-    public long getId() {
-        return id;
-    }
-
-    public String getUsername() {
+    public String GetUsername() {
         return username;
     }
-    //yeet
-    public String getEmail() {
+
+    public String GetEmail() {
         return email;
     }
 
-    public String getRole() {
-        return roles;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+    public String GetPassword(){return password;}
 
 }

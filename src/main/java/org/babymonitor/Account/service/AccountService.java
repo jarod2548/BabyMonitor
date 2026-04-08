@@ -4,7 +4,9 @@ import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.babymonitor.Account.model.Account;
 import org.babymonitor.Account.repository.AccountRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AccountService {
 
     private final AccountRepository repository;

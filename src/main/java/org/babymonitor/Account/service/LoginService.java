@@ -14,14 +14,14 @@ public class LoginService {
         this.repository = accountRepository;
     }
 
-    public String login(LoginDTO loginDTO) {
-        Account account = repository.findByUsername(loginDTO.getUsername())
-                .orElseThrow(() -> new RuntimeException("user not found"));
+    public Account login(Account model) {
+        Account account = repository.findByUsername(model.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (!account.getPassword().equals(loginDTO.getPassword())) {
-            return "Wachtwoord is onjuist";
+        if (!account.getPassword().equals(model.getPassword())) {
+            throw new RuntimeException("Invalid password");
         }
 
-        return "Login gelukt";
+        return account;
     }
 }

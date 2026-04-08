@@ -24,4 +24,10 @@ public class LoginDTO {
         username = Username;
         password = Password;
     }
+
+    public LoginDTO() { }
+
+    public Account convert(){
+        return new Account(username, password);
+    }
 }

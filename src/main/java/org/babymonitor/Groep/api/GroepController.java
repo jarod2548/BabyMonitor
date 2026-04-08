@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/groepen")
+//@RequestMapping("/user/groep")
 public class GroepController {
 
     private final GroepService groepService;
@@ -16,12 +16,12 @@ public class GroepController {
         this.groepService = groepService;
     }
 
-    @GetMapping
+    @GetMapping("/user/groep")
     public List<Groep> getAlleGroepen() {
         return groepService.getAlleGroepen();
     }
 
-    @PostMapping
+    @PostMapping("/groep")
     public Groep maakGroep(@RequestBody MaakGroepRequest request) {
         return groepService.maakGroep(request.getNaam());
     }

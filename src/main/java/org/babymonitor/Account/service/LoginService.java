@@ -1,23 +1,21 @@
-package org.babymonitor.Account.Service;
+package org.babymonitor.Account.service;
 
-import java.util.Optional;
-
-import org.babymonitor.Account.DTO.LoginDTO;
-import org.babymonitor.Account.Model.Account;
-import org.babymonitor.Account.Repository.AccountRepository;
+import org.babymonitor.Account.model.LoginDTO;
+import org.babymonitor.Account.model.Account;
+import org.babymonitor.Account.repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
 
-    private final AccountRepository accountRepository;
+    private final AccountRepository repository;
 
     public LoginService(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
+        this.repository = accountRepository;
     }
 
     public Account login(Account model) {
-        Account account = accountRepository.findByUsername(model.getUsername())
+        Account account = repository.findByUsername(model.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (!account.getPassword().equals(model.getPassword())) {

@@ -1,4 +1,4 @@
-package org.babymonitor.Account.Model;
+package org.babymonitor.Account.model;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -11,21 +11,16 @@ import jakarta.persistence.Table;
 public class Account {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(name = "naam")
     private String username;
-
     @Column(name = "email")
     private String email;
-
     @Column(name = "wachtwoord")
     private String password;
-
     @Column(name = "rol")
     private String roles;
-
 
     // standard constructor
     public Account(String name, String mail, String pswrd, String role) {
@@ -39,6 +34,9 @@ public class Account {
         username = name;
         this.password = password;
     }
+
+    public Account(){}
+
 
     // setters
     public void setUsername(String name) {
@@ -58,8 +56,8 @@ public class Account {
     }
 
     // getters
-    public Long getId(){
-      return id;
+    public long getId() {
+        return id;
     }
 
     public String getUsername() {

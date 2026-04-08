@@ -1,6 +1,6 @@
-package org.babymonitor.Account.Repository;
+package org.babymonitor.Account.repository;
 
-import org.babymonitor.Account.Model.Account;
+import org.babymonitor.Account.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

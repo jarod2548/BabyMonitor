@@ -1,4 +1,4 @@
-package org.babymonitor.Account.Model;
+package org.babymonitor.Account.model;
 
 import jakarta.validation.constraints.*;
 
@@ -45,10 +45,6 @@ public class AccountDTO {
     // getters
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public String getEmail() {

@@ -1,11 +1,35 @@
 services:
+  db:
+    image: postgres:18
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U BabyMonitor -d babymonitor" ]
+      interval: 5s
+      retries: 10
+    container_name: babymonitor-db
+    environment:
+      POSTGRES_USER: BabyMonitor
+      POSTGRES_PASSWORD: N8v$3xQp!7rLzB2w
+      POSTGRES_DB: babymonitor
+    networks:
+      - babymonitor-net
+    volumes:
+      - babymonitorData:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+
   backend:
     build: .
     container_name: Baby-Monitor-Backend
+    depends_on:
+      db:
+        condition: service_healthy
     ports:
       - "8080:8080"
     networks:
       - babymonitor-net
+
+volumes:
+  babymonitorData:
 
 
 networks:

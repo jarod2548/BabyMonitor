@@ -38,9 +38,9 @@ public class AccountController {
 
         if (savedAccount != null) {
             return ResponseEntity.status(201).body("Account created successfully");
-        } else {
-            return ResponseEntity.status(500).body("Failed to create account");
         }
+
+        return ResponseEntity.status(500).body("Internal server error");
     }
 
     @PostMapping("/login")
@@ -66,4 +66,19 @@ public class AccountController {
         return ResponseEntity.ok(response);
     }
 
+    @PatchMapping
+    public ResponseEntity<String> ChangePassword(@RequestBody @Valid PasswordDTO passwordDTO) {
+        Account account = accountService.findAccount(id);
+
+        Account updated = accountService.changePassword(
+                account,
+                passwordDTO.getOldpassword(),
+                passwordDTO.getnewpassword());
+
+        if (updated != null) {
+            return ResponseEntity.ok("Password changed successfully");
+        }
+
+        return ResponseEntity.badRequest().body("Password change failed");
+    }
 }

@@ -1,18 +1,22 @@
 package org.babymonitor.config;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.babymonitor.Account.model.Account;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class JWTService {
-    private String jwtSecret = "yQ9Zt5rYH9g4e2jTQfK8fN0+V7kW3s5xZp6yVb1cTnE=";
+    @Value("${JWT_SECRET}")
+    private String jwtSecret;
 
     SecretKey getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
@@ -24,11 +28,13 @@ public class JWTService {
     public String generateToken(Account model) {
 
         return Jwts.builder()
-                .setSubject(model.getUsername())
-                .claim("role", model.getRole())
-                .claim("ID", model.getId())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .claims()
+                .subject(model.getUsername())
+                .add("role", model.getRole())
+                .add("ID", model.getId())
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + expiration))
+                .and()
                 .signWith(getSigningKey())
                 .compact();
     }
@@ -45,39 +51,17 @@ public class JWTService {
         }
     }
 
-    public String getUsername(String token) {
-        return Jwts.parser()
+    public UserPrincipal getClaims(String token){
+        Claims claims = Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
-    }
+                .getPayload();
+        String username = claims.getSubject();
+        String role = (String) claims.get("role");
+        String id_string = (String) claims.get("ID");
+        Long id = Long.parseLong(id_string);
 
-    public String getRole(String token) {
-        return (String) Jwts.parser().verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("role");
-    }
-
-    public Long getID(String token) {
-        Object claim = Jwts.parser()
-                .verifyWith(getSigningKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .get("ID");
-
-        if (claim instanceof Integer) {
-            return ((Integer) claim).longValue();
-        } else if (claim instanceof Long) {
-            return (Long) claim;
-        } else if (claim instanceof String) {
-            return Long.parseLong((String) claim);
-        } else {
-            throw new IllegalArgumentException("Invalid ID claim type");
-        }
+        return new UserPrincipal(id, username,role);
     }
 }

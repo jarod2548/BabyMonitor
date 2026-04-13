@@ -1,15 +1,15 @@
 package org.babymonitor.Account.model;
 
 public class LoginDTO {
-    private String username;
+    private String email;
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String Username) {
-        username = Username;
+    public void setEmail(String email) {
+        email = email;
     }
 
     public String getPassword() {
@@ -20,14 +20,14 @@ public class LoginDTO {
         password = Password;
     }
 
-    public LoginDTO(String Username, String Password) {
-        username = Username;
+    public LoginDTO(String Email, String Password) {
+        email = Email;
         password = Password;
     }
 
     public LoginDTO() { }
 
     public Account convert(){
-        return new Account(username, password);
+        return new Account(email, password);
     }
 }

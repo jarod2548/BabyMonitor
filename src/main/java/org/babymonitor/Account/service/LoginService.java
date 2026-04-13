@@ -18,7 +18,7 @@ public class LoginService {
     }
 
     public Account login(Account model) {
-        Account account = repository.findByUsername(model.getUsername())
+        Account account = repository.findByEmail(model.getEmail())
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
         if (!passwordEncoder.matches(model.getPassword(), account.getPassword())) {

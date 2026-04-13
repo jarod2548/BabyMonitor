@@ -17,10 +17,10 @@ import java.util.List;
 
 @Component
 public class JWTFilter extends OncePerRequestFilter {
-    private final JWTService jwtUtil;
+    private final JWTService jwtService;
 
     public JWTFilter(JWTService Util){
-        jwtUtil = Util;
+        jwtService = Util;
     }
 
     @Override
@@ -31,15 +31,14 @@ public class JWTFilter extends OncePerRequestFilter {
 
         String token = extractJwtFromCookies(request);
 
-        if (token != null && jwtUtil.validateToken(token)) {
-            String username = jwtUtil.getUsername(token);
-            String role = jwtUtil.getRole(token);
+        if (token != null && jwtService.validateToken(token)) {
+            UserPrincipal user = jwtService.getClaims(token);
 
             UsernamePasswordAuthenticationToken auth =
                     new UsernamePasswordAuthenticationToken(
-                            username,
+                            user,
                             null,
-                            List.of(new SimpleGrantedAuthority("ROLE_" + role))
+                            List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
                     );
 
             auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

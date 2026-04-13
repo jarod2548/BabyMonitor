@@ -38,7 +38,7 @@ public class AccountDTO {
         password = pswrd;
     }
 
-    public void setRole(String role) {
+    public void setRoles(String role) {
         roles = role;
     }
 

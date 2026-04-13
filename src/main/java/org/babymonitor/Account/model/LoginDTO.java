@@ -8,8 +8,8 @@ public class LoginDTO {
         return email;
     }
 
-    public void setEmail(String email) {
-        email = email;
+    public void setEmail(String Email) {
+        email = Email;
     }
 
     public String getPassword() {
@@ -27,7 +27,12 @@ public class LoginDTO {
 
     public LoginDTO() { }
 
-    public Account convert(){
-        return new Account(email, password);
+
+    
+    public Account convert() {
+        Account account = new Account();
+        account.setEmail(this.email);
+        account.setPassword(this.password);
+        return account;
     }
 }

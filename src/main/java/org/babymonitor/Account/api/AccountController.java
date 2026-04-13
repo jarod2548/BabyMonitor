@@ -1,13 +1,12 @@
 package org.babymonitor.Account.api;
 
-import org.babymonitor.config.UserPrincipal;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.babymonitor.Account.model.*;
 import org.babymonitor.Account.service.*;
 import org.babymonitor.config.CookieService;
 import org.babymonitor.config.JWTService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -41,6 +40,7 @@ public class AccountController {
         } else {
             return ResponseEntity.status(500).body("Failed to create account");
         }
+        //yes
     }
 
     @PostMapping("/login")
@@ -58,12 +58,11 @@ public class AccountController {
     }
 
     @GetMapping("/auth")
-    public ResponseEntity<LoginResponseDTO> authorize(@AuthenticationPrincipal UserPrincipal user){
-        if(user == null){
+    public ResponseEntity<Void> authorize(Authentication auth){
+        if(auth == null || !auth.isAuthenticated()){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        LoginResponseDTO response = new LoginResponseDTO(user);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
 
 }

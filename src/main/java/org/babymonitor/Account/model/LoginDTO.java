@@ -29,10 +29,7 @@ public class LoginDTO {
 
 
     
-    public Account convert() {
-        Account account = new Account();
-        account.setEmail(this.email);
-        account.setPassword(this.password);
-        return account;
+    public Account convert(){
+        return new Account(email, password);
     }
 }

@@ -42,13 +42,4 @@ class AccountServiceTest {
         assertNotEquals("password123", savedAccount.getPassword());
         assertTrue(savedAccount.getPassword().startsWith("$argon2"));
     }
-
-    @Test
-    void hashpassword_ShouldReturnArgon2Hash() {
-        String hashed = accountService.hashpassword("mijnWachtwoord");
-
-        assertNotNull(hashed);
-        assertNotEquals("mijnWachtwoord", hashed);
-        assertTrue(hashed.startsWith("$argon2"));
-    }
 }

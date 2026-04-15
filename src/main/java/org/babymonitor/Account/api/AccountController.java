@@ -1,23 +1,69 @@
-package org.babymonitor.Account.API;
+package org.babymonitor.Account.api;
 
-import org.babymonitor.Account.DTO.LoginDTO;
-import org.babymonitor.Account.Service.LoginService;
+import org.babymonitor.config.UserPrincipal;
+import org.springframework.http.HttpStatus;
+import org.babymonitor.Account.model.*;
+import org.babymonitor.Account.service.*;
+import org.babymonitor.config.CookieService;
+import org.babymonitor.config.JWTService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/account")
 public class AccountController {
 
+    //
+    private final AccountService accountService;
     private final LoginService loginService;
+    private final JWTService jwtService;
+    private final CookieService cookieService;
 
-    public AccountController(LoginService loginService)
+    public AccountController(LoginService loginService,
+                             AccountService AccountService,
+                             JWTService JWTService,
+                             CookieService CookieService)
     {
         this.loginService = loginService;
+        this.accountService = AccountService;
+        this.jwtService = JWTService;
+        this.cookieService = CookieService;
+    }
+
+    @PostMapping
+    public ResponseEntity<String> CreateAccount(@RequestBody @Valid AccountDTO account) {
+        Account savedAccount = accountService.createAccount(account.convert());
+
+        if (savedAccount != null) {
+            return ResponseEntity.status(201).body("Account created successfully");
+        } else {
+            return ResponseEntity.status(500).body("Failed to create account");
+        }
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginDTO loginDTO)
+    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO)
     {
-        return loginService.login(loginDTO);
+        Account model = loginDTO.convert();
+        Account data = loginService.login(model);
+
+        String token = jwtService.generateToken(data);
+
+        return ResponseEntity.ok().header("Set-Cookie",
+                        cookieService.createJwtCookie(token)
+                                .toString())
+                .body("Login Successful");
     }
+
+    @GetMapping("/auth")
+    public ResponseEntity<LoginResponseDTO> authorize(@AuthenticationPrincipal UserPrincipal user){
+        if(user == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        LoginResponseDTO response = new LoginResponseDTO(user);
+        return ResponseEntity.ok(response);
+    }
+
 }

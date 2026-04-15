@@ -1,31 +1,34 @@
-package org.babymonitor.Account.service;
+package org.babymonitor.Account.Service;
 
-import org.babymonitor.Account.model.LoginDTO;
-import org.babymonitor.Account.model.Account;
-import org.babymonitor.Account.repository.AccountRepository;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.Optional;
+
+import org.babymonitor.Account.DTO.LoginDTO;
+import org.babymonitor.Account.Model.Account;
+import org.babymonitor.Account.Repository.AccountRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
 
-    private final AccountRepository repository;
-    private final PasswordEncoder passwordEncoder;
+    private final AccountRepository accountRepository;
 
     public LoginService(AccountRepository accountRepository) {
-        this.repository = accountRepository;
-        this.passwordEncoder = new Argon2PasswordEncoder(16, 32, 1, 1 << 14, 3);
+        this.accountRepository = accountRepository;
     }
 
-    public Account login(Account model) {
-        Account account = repository.findByEmail(model.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public String login(LoginDTO loginDTO) {
+        Optional<Account> accountOptional = accountRepository.findByUsername(loginDTO.getUsername());
 
-        if (!passwordEncoder.matches(model.getPassword(), account.getPassword())) {
-            throw new RuntimeException("Invalid password");
+        if (accountOptional.isEmpty()) {
+            return "Gebruiker niet gevonden";
         }
 
-        return account;
+        Account account = accountOptional.get();
+
+        if (!account.GetPassword().equals(loginDTO.getPassword())) {
+            return "Wachtwoord is onjuist";
+        }
+
+        return "Login gelukt";
     }
 }

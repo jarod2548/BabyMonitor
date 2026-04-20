@@ -1,6 +1,5 @@
 package org.babymonitor.Account.service;
 
-import org.babymonitor.Account.model.LoginDTO;
 import org.babymonitor.Account.model.Account;
 import org.babymonitor.Account.repository.AccountRepository;
 import org.springframework.stereotype.Service;

@@ -51,7 +51,7 @@ public class AccountDTO {
         return email;
     }
 
-    public String getRoles() {
+    public String getRole() {
         return roles;
     }
 

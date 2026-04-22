@@ -51,7 +51,7 @@ public class JWTService {
         }
     }
 
-    public UserPrincipal getClaims(String token){
+    public UserPrincipal getClaims(String token) {
         Claims claims = Jwts.parser()
                 .verifyWith(getSigningKey())
                 .build()
@@ -59,9 +59,8 @@ public class JWTService {
                 .getPayload();
         String username = claims.getSubject();
         String role = (String) claims.get("role");
-        String id_string = (String) claims.get("ID");
-        Long id = Long.parseLong(id_string);
+        Long id = ((Integer) claims.get("ID")).longValue();
 
-        return new UserPrincipal(id, username,role);
+        return new UserPrincipal(id, username, role);
     }
 }

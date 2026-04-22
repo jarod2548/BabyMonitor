@@ -29,7 +29,7 @@ public class PasswordDTO {
         return oldpassword;
     }
 
-    public String getnewpassword() {
+    public String getNewpassword() {
         return newpassword;
     }
 }

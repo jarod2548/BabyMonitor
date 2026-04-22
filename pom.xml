@@ -129,6 +129,7 @@
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
 
+
         <!-- Source: https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on -->
         <dependency>
             <groupId>org.bouncycastle</groupId>

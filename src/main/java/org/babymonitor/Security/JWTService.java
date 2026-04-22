@@ -1,4 +1,4 @@
-package org.babymonitor.config;
+package org.babymonitor.Security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
-import java.util.UUID;
 
 @Service
 public class JWTService {
@@ -59,8 +58,8 @@ public class JWTService {
                 .getPayload();
         String username = claims.getSubject();
         String role = (String) claims.get("role");
-        String id_string = (String) claims.get("ID");
-        Long id = Long.parseLong(id_string);
+        Number idNumber = (Number) claims.get("ID");
+        Long id = idNumber.longValue();
 
         return new UserPrincipal(id, username,role);
     }

@@ -5,7 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.babymonitor.Account.model.*;
 import org.babymonitor.Account.service.*;
 import org.babymonitor.config.CookieService;
-import org.babymonitor.config.JWTService;
+import org.babymonitor.Security.JWTService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
@@ -44,17 +44,18 @@ public class AccountController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO)
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDTO)
     {
         Account model = loginDTO.convert();
         Account data = loginService.login(model);
+        LoginResponseDTO responseDTO = new LoginResponseDTO(data);
 
         String token = jwtService.generateToken(data);
 
         return ResponseEntity.ok().header("Set-Cookie",
                         cookieService.createJwtCookie(token)
                                 .toString())
-                .body("Login Successful");
+                .body(responseDTO);
     }
 
     @GetMapping("/auth")

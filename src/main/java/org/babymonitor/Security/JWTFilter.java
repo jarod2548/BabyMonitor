@@ -1,4 +1,4 @@
-package org.babymonitor.config;
+package org.babymonitor.Security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

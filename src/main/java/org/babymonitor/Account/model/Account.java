@@ -30,8 +30,8 @@ public class Account {
         roles = role;
     }
 
-    public Account(String name, String password){
-        username = name;
+    public Account(String Email, String password){
+        email = Email;
         this.password = password;
     }
 

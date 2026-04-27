@@ -2,7 +2,9 @@ package org.babymonitor.Course.service;
 
 import org.babymonitor.Course.model.Course;
 import org.babymonitor.Course.repository.CourseRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CourseService {
 
     private final CourseRepository courseRepository;

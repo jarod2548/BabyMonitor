@@ -9,6 +9,7 @@ import org.babymonitor.Security.UserPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
@@ -20,6 +21,7 @@ public class AntwoordController {
         this.antwoordService = antwoordService;
     }
 
+    @PostMapping("/teacher/antwoord")
     public ResponseEntity<AntwoordResponseDTO> maakAntwoord(@RequestBody
                                                             @Valid
                                                             @AuthenticationPrincipal UserPrincipal user,

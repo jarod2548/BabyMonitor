@@ -31,7 +31,7 @@ public class AccountController {
         this.cookieService = CookieService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<String> CreateAccount(@RequestBody @Valid AccountDTO account) {
         Account savedAccount = accountService.createAccount(account.convert());
 

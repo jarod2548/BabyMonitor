@@ -39,4 +39,8 @@ public class AccountService {
         account.setPassword(hashpassword(newpswrd));
         return repository.save(account);
     }
+
+    public void deleteAccount(Long id) {
+        repository.deleteById(id);
+    }
 }

@@ -1,6 +1,6 @@
 package org.babymonitor.Account.model;
 
-import org.babymonitor.config.UserPrincipal;
+import org.babymonitor.Security.UserPrincipal;
 
 public class LoginResponseDTO {
     private String username;

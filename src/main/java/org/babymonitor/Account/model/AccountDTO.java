@@ -14,7 +14,7 @@ public class AccountDTO {
     @NotNull
     private String password;
 
-    
+
     private String roles;
 
     // standard constructor
@@ -51,11 +51,14 @@ public class AccountDTO {
         return email;
     }
 
-    public String getRole() {
+    public String getRoles() {
         return roles;
     }
 
     public Account convert() {
         return new Account(this.username, this.email, this.password, "USER");
+    }
+    public Account convertTeacher(){
+        return new Account(this.username, this.email, this.password, "TEACHER");
     }
 }

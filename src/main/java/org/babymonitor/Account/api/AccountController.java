@@ -31,7 +31,7 @@ public class AccountController {
         this.cookieService = CookieService;
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<String> CreateAccount(@RequestBody @Valid AccountDTO account) {
         Account savedAccount = accountService.createAccount(account.convert());
 
@@ -81,13 +81,5 @@ public class AccountController {
         }
 
         return ResponseEntity.badRequest().body("Password change failed");
-    }
-
-    @DeleteMapping
-    public ResponseEntity<String> deleteAccount(
-            @AuthenticationPrincipal UserPrincipal request) {
-        accountService.deleteAccount(request.getId());
-
-        return ResponseEntity.ok("Account deleted");
     }
 }

@@ -14,6 +14,7 @@ public class Vraag {
     private String tekst;
     @Column(name = "order")
     private int order;
+    private Long courseID;
     @ManyToOne
     @JoinColumn(name = "course")
     private Course course;
@@ -54,5 +55,13 @@ public class Vraag {
 
     public int getOrder() {
         return order;
+    }
+
+    public void setCourseID(Long courseID) {
+        this.courseID = courseID;
+    }
+
+    public Long getCourseID() {
+        return courseID;
     }
 }

@@ -11,8 +11,8 @@ public class Antwoord {
     @Column(name = "tekst")
     private String tekst;
     @ManyToOne
-    @JoinColumn(name = "vraag")
-    private Vraag vraag;
+    @JoinColumn(name = "course")
+    private Course course;
 
     public Antwoord(String Tekst){
         tekst = Tekst;
@@ -34,11 +34,11 @@ public class Antwoord {
         this.id = id;
     }
 
-    public void setVraag(Vraag vraag) {
-        this.vraag = vraag;
+    public Course getCourse() {
+        return course;
     }
 
-    public Vraag getVraag() {
-        return vraag;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

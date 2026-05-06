@@ -6,6 +6,7 @@ import org.babymonitor.Course.model.CourseDTO;
 import org.babymonitor.Course.model.CourseResponseDTO;
 import org.babymonitor.Course.service.CourseService;
 import org.babymonitor.Security.UserPrincipal;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,6 @@ public class CourseController {
         Course model = dto.naarModel();
         Course saved = courseService.maakCourse(model);
 
-        return ResponseEntity.ok(new CourseResponseDTO(saved));
+        return ResponseEntity.status(HttpStatus.CREATED).body(new CourseResponseDTO(saved));
     }
 }

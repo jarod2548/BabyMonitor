@@ -1,11 +1,11 @@
 package org.babymonitor.Account.api;
 
-import org.babymonitor.config.UserPrincipal;
+import org.babymonitor.Security.JWTService;
+import org.babymonitor.Security.UserPrincipal;
 import org.springframework.http.HttpStatus;
 import org.babymonitor.Account.model.*;
 import org.babymonitor.Account.service.*;
 import org.babymonitor.config.CookieService;
-import org.babymonitor.config.JWTService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +41,19 @@ public class AccountController {
             return ResponseEntity.status(500).body("Failed to create account");
         }
     }
+    @PostMapping("/registerTeacher")
+    public ResponseEntity<String> CreateTeacherAccount(@RequestBody @Valid AccountDTO account) {
+        Account savedAccount = accountService.createAccount(account.convertTeacher());
+
+        if (savedAccount != null) {
+            return ResponseEntity.status(201).body("Account created successfully");
+        } else {
+            return ResponseEntity.status(500).body("Failed to create account");
+        }
+    }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDTO) {
         Account model = loginDTO.convert();
         Account data = loginService.login(model);
 
@@ -52,7 +62,7 @@ public class AccountController {
         return ResponseEntity.ok().header("Set-Cookie",
                 cookieService.createJwtCookie(token)
                         .toString())
-                .body("Login Successful");
+                .body(new LoginResponseDTO(data));
     }
 
     @GetMapping("/auth")

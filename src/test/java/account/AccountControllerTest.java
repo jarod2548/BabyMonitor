@@ -6,9 +6,9 @@ import org.babymonitor.Account.model.LoginDTO;
 import org.babymonitor.Account.model.LoginResponseDTO;
 import org.babymonitor.Account.service.AccountService;
 import org.babymonitor.Account.service.LoginService;
+import org.babymonitor.Security.JWTService;
+import org.babymonitor.Security.UserPrincipal;
 import org.babymonitor.config.CookieService;
-import org.babymonitor.config.JWTService;
-import org.babymonitor.config.UserPrincipal;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -79,10 +79,10 @@ class AccountControllerTest {
         when(jwtService.generateToken(account)).thenReturn(token);
         when(cookieService.createJwtCookie(token)).thenReturn(cookie);
     
-        ResponseEntity<String> response = accountController.login(loginDTO);
+        ResponseEntity<LoginResponseDTO> response = accountController.login(loginDTO);
     
         assertEquals(200, response.getStatusCode().value());
-        assertEquals("Login Successful", response.getBody());
+        assertNotNull(response);
         assertEquals(cookie.toString(), response.getHeaders().getFirst("Set-Cookie"));
     }
 

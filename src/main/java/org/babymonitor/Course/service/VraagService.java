@@ -5,6 +5,8 @@ import org.babymonitor.Course.model.Vraag;
 import org.babymonitor.Course.repository.VraagRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VraagService {
 
@@ -16,10 +18,18 @@ public class VraagService {
         this.courseService = courseService;
     }
 
-    public Vraag maakVraag(Vraag model, Long courseID){
-        Course proxy = courseService.leesCourseLazy(courseID);
+    public Vraag maakVraag(Vraag model){
+        Course proxy = courseService.leesCourseLazy(model.getCourseID());
+        int currentCount = (int)vraagRepository.countByCourse_Id(proxy.getId());
         model.setCourse(proxy);
+        model.setOrder(currentCount + 1);
+
         return vraagRepository.save(model);
+    }
+
+    public List<Vraag> leesVragen(Long courseID){
+        List<Vraag> resultaten = vraagRepository.findByCourse_IdOrderByOrderAsc(courseID);
+        return resultaten;
     }
 
     public Vraag leesVraagLazy(Long vraagID){

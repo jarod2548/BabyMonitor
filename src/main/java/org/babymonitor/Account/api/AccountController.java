@@ -82,4 +82,12 @@ public class AccountController {
 
         return ResponseEntity.badRequest().body("Password change failed");
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteAccount(
+            @AuthenticationPrincipal UserPrincipal request) {
+        accountService.deleteAccount(request.getId());
+
+        return ResponseEntity.ok("Account deleted");
+    }
 }

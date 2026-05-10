@@ -14,7 +14,7 @@ public class AccountDTO {
     @NotNull
     private String password;
 
-    @NotNull
+
     private String roles;
 
     // standard constructor
@@ -56,6 +56,9 @@ public class AccountDTO {
     }
 
     public Account convert() {
-        return new Account(this.username, this.email, this.password, this.roles);
+        return new Account(this.username, this.email, this.password, "USER");
+    }
+    public Account convertTeacher(){
+        return new Account(this.username, this.email, this.password, "TEACHER");
     }
 }

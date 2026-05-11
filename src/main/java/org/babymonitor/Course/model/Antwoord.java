@@ -1,21 +1,34 @@
 package org.babymonitor.Course.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "antwoord")
 public class Antwoord {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "tekst")
     private String tekst;
+
     @ManyToOne
     @JoinColumn(name = "course")
     private Course course;
 
-    public Antwoord(String Tekst){
-        tekst = Tekst;
+    public Antwoord() {
+    }
+
+    public Antwoord(String tekst){
+        this.tekst = tekst;
     }
 
     public void setTekst(String tekst) {

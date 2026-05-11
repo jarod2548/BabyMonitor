@@ -1,8 +1,7 @@
 package org.babymonitor.Course.service;
 
 import org.babymonitor.Course.model.Antwoord;
-import org.babymonitor.Course.model.Course;
-import org.babymonitor.Course.model.Vraag;
+
 import org.babymonitor.Course.repository.AntwoordRepository;
 import org.springframework.stereotype.Service;
 
@@ -10,16 +9,13 @@ import org.springframework.stereotype.Service;
 public class AntwoordService {
 
     private final AntwoordRepository antwoordRepository;
-    private final CourseService courseService;
 
-    public AntwoordService(AntwoordRepository antwoordRepository, CourseService courseService) {
+    public AntwoordService(AntwoordRepository antwoordRepository) {
         this.antwoordRepository = antwoordRepository;
-        this.courseService = courseService;
+
     }
 
-    public Antwoord maakAntwoord(Antwoord model, Long courseID){
-        Course proxy = courseService.leesCourseLazy(courseID);
-        model.setCourse(proxy);
+    public Antwoord maakAntwoord(Antwoord model, Long courseID) {
         return antwoordRepository.save(model);
     }
 }

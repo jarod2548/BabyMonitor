@@ -25,11 +25,19 @@ CREATE TABLE vraag (
 
 CREATE TABLE antwoord (
     id BIGSERIAL PRIMARY KEY ,
-    tekst VARCHAR(100),
-    course_id BIGINT,
+    tekst VARCHAR(100)
+);
 
-    CONSTRAINT fk_antwoord_vraag
+CREATE TABLE courseantwoord (
+    course_id BIGINT NOT NULL,
+    antwoord_id BIGINT NOT NULL,
+    PRIMARY KEY (course_id, antwoord_id),
+    CONSTRAINT fk_course
         FOREIGN KEY (course_id)
             REFERENCES course(id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_antwoord
+        FOREIGN KEY (antwoord_id)
+            REFERENCES antwoord(id)
             ON DELETE CASCADE
 );

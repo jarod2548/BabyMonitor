@@ -1,6 +1,8 @@
 package org.babymonitor.Course.model;
 
+import java.util.HashSet;
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "antwoord")
@@ -8,14 +10,20 @@ public class Antwoord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "tekst")
     private String tekst;
-    @ManyToOne
-    @JoinColumn(name = "course")
-    private Course course;
 
-    public Antwoord(String Tekst){
+    // Optional: Add the reverse mapping (not required, but good for bidirectional
+    // access)
+    @ManyToMany(mappedBy = "antwoorden")
+    private Set<Course> courses = new HashSet<>();
+
+    public Antwoord(String Tekst) {
         tekst = Tekst;
+    }
+
+    public Antwoord() {
     }
 
     public void setTekst(String tekst) {
@@ -34,11 +42,11 @@ public class Antwoord {
         this.id = id;
     }
 
-    public Course getCourse() {
-        return course;
+    public Set<Course> getCourses() {
+        return courses;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

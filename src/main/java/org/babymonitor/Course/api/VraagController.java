@@ -1,9 +1,7 @@
 package org.babymonitor.Course.api;
 
 import jakarta.validation.Valid;
-import org.babymonitor.Course.model.Vraag;
-import org.babymonitor.Course.model.VraagDTO;
-import org.babymonitor.Course.model.VraagResponseDTO;
+import org.babymonitor.Course.model.*;
 import org.babymonitor.Course.service.VraagService;
 import org.babymonitor.Security.UserPrincipal;
 import org.springframework.http.HttpStatus;
@@ -45,5 +43,21 @@ public class VraagController {
             response.add(new VraagResponseDTO(v));
         }
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/teacher/vraag-antwoord")
+    public ResponseEntity<VraagAntwoordResponseDTO> maakVraagAntwoord(
+            @RequestBody @Valid VraagAntwoordDTO dto
+    ) {
+
+        VraagAntwoord saved =
+                vraagService.maakVraagAntwoord(
+                        dto.getVraagId(),
+                        dto.getAntwoordId()
+                );
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new VraagAntwoordResponseDTO(saved));
     }
 }

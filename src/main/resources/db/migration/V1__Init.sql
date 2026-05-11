@@ -33,3 +33,19 @@ CREATE TABLE antwoord (
             REFERENCES course(id)
             ON DELETE CASCADE
 );
+
+CREATE TABLE vraag_antwoord (
+    id BIGSERIAL PRIMARY KEY,
+    vraag_id BIGINT,
+    antwoord_id BIGINT,
+
+    CONSTRAINT fk_vraag
+        FOREIGN KEY (vraag_id)
+            REFERENCES vraag(id)
+            ON DELETE CASCADE,
+
+    CONSTRAINT fk_antwoord
+        FOREIGN KEY (antwoord_id)
+            REFERENCES antwoord(id)
+            ON DELETE CASCADE,
+);

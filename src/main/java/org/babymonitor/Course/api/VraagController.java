@@ -1,0 +1,49 @@
+package org.babymonitor.Course.api;
+
+import jakarta.validation.Valid;
+import org.babymonitor.Course.model.Vraag;
+import org.babymonitor.Course.model.VraagDTO;
+import org.babymonitor.Course.model.VraagResponseDTO;
+import org.babymonitor.Course.service.VraagService;
+import org.babymonitor.Security.UserPrincipal;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+public class VraagController {
+    private final VraagService vraagService;
+
+    public VraagController(VraagService vraagService) {
+        this.vraagService = vraagService;
+    }
+
+    @PostMapping("/teacher/vraag")
+    public ResponseEntity<VraagResponseDTO> maakVraag(@RequestBody
+                          @Valid
+                          VraagDTO dto,
+                          @AuthenticationPrincipal UserPrincipal user){
+        Vraag saved = vraagService.maakVraag(dto.naarModel());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(new VraagResponseDTO(saved));
+    }
+
+    @GetMapping("/user/vraag/{courseID}")
+    public ResponseEntity<List<VraagResponseDTO>> leesVragen(@AuthenticationPrincipal UserPrincipal user,
+                                                             @PathVariable Long courseId){
+        List<Vraag> resultaten = vraagService.leesVragen(courseId);
+        List<VraagResponseDTO> response = new ArrayList<>();
+        for(Vraag v : resultaten){
+            response.add(new VraagResponseDTO(v));
+        }
+        return ResponseEntity.ok(response);
+    }
+}

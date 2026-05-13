@@ -19,7 +19,11 @@ public class VraagService {
     private final VraagAntwoordRepository vraagAntwoordRepository;
     private final AntwoordRepository antwoordRepository;
 
-    public VraagService(VraagRepository vraagRepository, CourseService courseService, VraagAntwoordRepository vraagAntwoordRepository, AntwoordRepository antwoordRepository) {
+    public VraagService(VraagRepository vraagRepository,
+                        CourseService courseService,
+                        VraagAntwoordRepository vraagAntwoordRepository,
+                        AntwoordRepository antwoordRepository) {
+
         this.vraagRepository = vraagRepository;
         this.courseService = courseService;
         this.vraagAntwoordRepository = vraagAntwoordRepository;
@@ -27,8 +31,12 @@ public class VraagService {
     }
 
     public Vraag maakVraag(Vraag model){
+
         Course proxy = courseService.leesCourseLazy(model.getCourseID());
-        int currentCount = (int)vraagRepository.countByCourse_Id(proxy.getId());
+
+        int currentCount =
+                (int) vraagRepository.countByCourse_Id(proxy.getId());
+
         model.setCourse(proxy);
         model.setOrder(currentCount + 1);
 
@@ -36,7 +44,10 @@ public class VraagService {
     }
 
     public List<Vraag> leesVragen(Long courseID){
-        List<Vraag> resultaten = vraagRepository.findByCourse_IdOrderByOrderAsc(courseID);
+
+        List<Vraag> resultaten =
+                vraagRepository.findByCourse_IdOrderByOrderAsc(courseID);
+
         return resultaten;
     }
 
@@ -44,11 +55,19 @@ public class VraagService {
         return vraagRepository.getReferenceById(vraagID);
     }
 
-    public VraagAntwoord maakVraagAntwoord(Long vraagId, Long antwoordId) {
-        Vraag vraag = vraagRepository.getReferenceById(vraagId);
-        Antwoord antwoord = antwoordRepository.getReferenceById(antwoordId);
+    public VraagAntwoord maakVraagAntwoord(Long vraagId,
+                                           Long antwoordId,
+                                           boolean correct) {
 
-        VraagAntwoord vraagAntwoord = new VraagAntwoord(vraag, antwoord);
+        Vraag vraag = vraagRepository.getReferenceById(vraagId);
+
+        Antwoord antwoord =
+                antwoordRepository.getReferenceById(antwoordId);
+
+        VraagAntwoord vraagAntwoord =
+                new VraagAntwoord(vraag, antwoord);
+
+        vraagAntwoord.setCorrect(correct);
 
         return vraagAntwoordRepository.save(vraagAntwoord);
     }

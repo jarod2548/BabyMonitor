@@ -74,3 +74,4 @@ public boolean controleerAntwoord(Long vraagId,
 
     return vraagAntwoord.isCorrect();
 }
+}

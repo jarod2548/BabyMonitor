@@ -8,8 +8,6 @@ public class VraagAntwoordResponseDTO {
     private Long antwoordId;
     private String antwoordTekst;
 
-    private boolean correct;
-
     public VraagAntwoordResponseDTO(VraagAntwoord model){
 
         vraagId = model.getVraag().getId();
@@ -17,8 +15,6 @@ public class VraagAntwoordResponseDTO {
 
         antwoordId = model.getAntwoord().getId();
         antwoordTekst = model.getAntwoord().getTekst();
-
-        correct = model.isCorrect();
     }
 
     public Long getVraagId() {
@@ -51,13 +47,5 @@ public class VraagAntwoordResponseDTO {
 
     public void setAntwoordTekst(String antwoordTekst) {
         this.antwoordTekst = antwoordTekst;
-    }
-
-    public boolean isCorrect() {
-        return correct;
-    }
-
-    public void setCorrect(boolean correct) {
-        this.correct = correct;
     }
 }

@@ -10,7 +10,10 @@ import org.babymonitor.Security.UserPrincipal;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import jakarta.validation.Valid;
 
@@ -27,20 +30,12 @@ public class AntwoordController {
     public ResponseEntity<AntwoordResponseDTO> maakAntwoord(
             @RequestBody
             @Valid
-            AntwoordDTO dto,
+            @AuthenticationPrincipal UserPrincipal user,
+            AntwoordDTO dto){
 
-            @AuthenticationPrincipal
-            UserPrincipal user){
+        Antwoord saved = antwoordService.maakAntwoord(dto.naarModel(), dto.naarModel().getId());
 
-        Antwoord saved =
-                antwoordService.maakAntwoord(
-                        dto.naarModel(),
-                        dto.getCourseId()
-                );
-
-        return ResponseEntity.ok(
-                new AntwoordResponseDTO(saved)
-        );
+        return ResponseEntity.ok(new AntwoordResponseDTO(saved));
     }
 
     @GetMapping("/course/{id}/antwoorden")

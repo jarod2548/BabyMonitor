@@ -1,5 +1,7 @@
 package org.babymonitor.Course.service;
 
+import java.util.List;
+
 import org.babymonitor.Course.model.Antwoord;
 import org.babymonitor.Course.model.Course;
 import org.babymonitor.Course.model.Vraag;
@@ -8,8 +10,6 @@ import org.babymonitor.Course.repository.AntwoordRepository;
 import org.babymonitor.Course.repository.VraagAntwoordRepository;
 import org.babymonitor.Course.repository.VraagRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class VraagService {
@@ -44,12 +44,34 @@ public class VraagService {
         return vraagRepository.getReferenceById(vraagID);
     }
 
-    public VraagAntwoord maakVraagAntwoord(Long vraagId, Long antwoordId) {
-        Vraag vraag = vraagRepository.getReferenceById(vraagId);
-        Antwoord antwoord = antwoordRepository.getReferenceById(antwoordId);
+    public VraagAntwoord maakVraagAntwoord(Long vraagId,
+                                       Long antwoordId,
+                                       boolean correct) {
 
-        VraagAntwoord vraagAntwoord = new VraagAntwoord(vraag, antwoord);
+    Vraag vraag = vraagRepository.getReferenceById(vraagId);
 
-        return vraagAntwoordRepository.save(vraagAntwoord);
-    }
+    Antwoord antwoord =
+            antwoordRepository.getReferenceById(antwoordId);
+
+    VraagAntwoord vraagAntwoord =
+            new VraagAntwoord(vraag, antwoord);
+
+    vraagAntwoord.setCorrect(correct);
+
+    return vraagAntwoordRepository.save(vraagAntwoord);
+}
+
+public boolean controleerAntwoord(Long vraagId,
+                                  Long antwoordId){
+
+    VraagAntwoord vraagAntwoord =
+            vraagAntwoordRepository
+                    .findByVraag_IdAndAntwoord_Id(
+                            vraagId,
+                            antwoordId
+                    )
+                    .orElseThrow();
+
+    return vraagAntwoord.isCorrect();
+}
 }

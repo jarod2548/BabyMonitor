@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AntwoordRepository extends JpaRepository<Antwoord, Long> {
 
-    List<Antwoord> findByCourse_Id(Long courseId);
+    List<Antwoord> findByCourses_Id(Long courseId);
 
 }

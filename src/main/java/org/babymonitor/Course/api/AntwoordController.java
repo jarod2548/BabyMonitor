@@ -28,10 +28,8 @@ public class AntwoordController {
 
     @PostMapping("/teacher/antwoord")
     public ResponseEntity<AntwoordResponseDTO> maakAntwoord(
-            @RequestBody
-            @Valid
-            @AuthenticationPrincipal UserPrincipal user,
-            AntwoordDTO dto){
+            @RequestBody @Valid AntwoordDTO dto,
+            @AuthenticationPrincipal UserPrincipal user) {
 
         Antwoord saved = antwoordService.maakAntwoord(dto.naarModel(), dto.naarModel().getId());
 
@@ -40,15 +38,13 @@ public class AntwoordController {
 
     @GetMapping("/course/{id}/antwoorden")
     public ResponseEntity<List<AntwoordResponseDTO>> leesAntwoorden(
-            @PathVariable Long id){
+            @PathVariable Long id) {
 
-        List<Antwoord> antwoorden =
-                antwoordService.leesAntwoordenVanCourse(id);
+        List<Antwoord> antwoorden = antwoordService.leesAntwoordenVanCourse(id);
 
-        List<AntwoordResponseDTO> response =
-                antwoorden.stream()
-                        .map(AntwoordResponseDTO::new)
-                        .toList();
+        List<AntwoordResponseDTO> response = antwoorden.stream()
+                .map(AntwoordResponseDTO::new)
+                .toList();
 
         return ResponseEntity.ok(response);
     }

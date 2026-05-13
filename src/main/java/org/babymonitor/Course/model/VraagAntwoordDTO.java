@@ -10,8 +10,6 @@ public class VraagAntwoordDTO {
     @NotNull
     private Long antwoordId;
 
-    private boolean correct;
-
     public Long getVraagId() {
         return vraagId;
     }
@@ -26,13 +24,5 @@ public class VraagAntwoordDTO {
 
     public void setAntwoordId(Long antwoordId) {
         this.antwoordId = antwoordId;
-    }
-
-    public boolean isCorrect() {
-        return correct;
-    }
-
-    public void setCorrect(boolean correct) {
-        this.correct = correct;
     }
 }

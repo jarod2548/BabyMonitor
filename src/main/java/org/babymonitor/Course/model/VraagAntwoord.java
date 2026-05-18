@@ -45,12 +45,4 @@ public class VraagAntwoord {
   public void setAntwoord(Antwoord antwoord) {
     this.antwoord = antwoord;
   }
-
-    public boolean isCorrect() {
-        return correct;
-    }
-
-    public void setCorrect(boolean correct) {
-        this.correct = correct;
-    }
 }

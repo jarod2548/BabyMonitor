@@ -31,30 +31,22 @@ public class VraagController {
             @AuthenticationPrincipal
             UserPrincipal user){
 
-        Vraag saved = vraagService.maakVraag(dto.naarModel());
+        Vraag saved = vraagService.maakVraag(dto.naarModel(), dto.getCourseID());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new VraagResponseDTO(saved));
     }
 
-    @GetMapping("/user/vraag/{courseId}")
-    public ResponseEntity<List<VraagResponseDTO>> leesVragen(
+    @GetMapping("/user/vraag/{courseId}/{order}")
+    public ResponseEntity<VraagResponseDTO> leesVragen(
             @AuthenticationPrincipal UserPrincipal user,
+            @PathVariable Long courseId,
+            @PathVariable int order){
 
-            @PathVariable Long courseId){
+        Vraag resultaat = vraagService.leesVraag(courseId, order);
 
-        List<Vraag> resultaten =
-                vraagService.leesVragen(courseId);
-
-        List<VraagResponseDTO> response =
-                new ArrayList<>();
-
-        for(Vraag v : resultaten){
-            response.add(new VraagResponseDTO(v));
-        }
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new VraagResponseDTO(resultaat));
     }
 
     @PostMapping("/teacher/vraag-antwoord")
@@ -67,8 +59,7 @@ public class VraagController {
         VraagAntwoord saved =
                 vraagService.maakVraagAntwoord(
                         dto.getVraagId(),
-                        dto.getAntwoordId(),
-                        dto.isCorrect()
+                        dto.getAntwoordId()
                 );
 
         return ResponseEntity

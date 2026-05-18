@@ -15,6 +15,7 @@ CREATE TABLE course (
 CREATE TABLE vraag (
     id BIGSERIAL PRIMARY KEY,
     tekst VARCHAR(100),
+    volgorde INT,
     course_id BIGINT,
 
     CONSTRAINT fk_vraag_course
@@ -47,5 +48,5 @@ CREATE TABLE vraag_antwoord (
     CONSTRAINT fk_antwoord
         FOREIGN KEY (antwoord_id)
             REFERENCES antwoord(id)
-            ON DELETE CASCADE,
+            ON DELETE CASCADE
 );

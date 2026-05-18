@@ -2,8 +2,6 @@ package org.babymonitor.Course.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "vraag")
 public class Vraag {
@@ -12,11 +10,10 @@ public class Vraag {
     private Long id;
     @Column(name = "tekst")
     private String tekst;
-    @Column(name = "order")
-    private int order;
-    private Long courseID;
+    @Column(name = "volgorde")
+    private int volgorde;
     @ManyToOne
-    @JoinColumn(name = "course")
+    @JoinColumn(name = "course_id")
     private Course course;
 
     public Vraag(String Tekst){
@@ -49,19 +46,12 @@ public class Vraag {
         return id;
     }
 
-    public void setOrder(int order) {
-        this.order = order;
+    public void setVolgorde(int volgorde) {
+        this.volgorde = volgorde;
     }
 
-    public int getOrder() {
-        return order;
+    public int getVolgorde() {
+        return volgorde;
     }
 
-    public void setCourseID(Long courseID) {
-        this.courseID = courseID;
-    }
-
-    public Long getCourseID() {
-        return courseID;
-    }
 }

@@ -45,8 +45,21 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build Maven package
+      - name: Backend code analysis
+        run: mvn checkstyle:check
+
+      - name: Backend formatting check
+        run: mvn spotless:check
+
+      - name: Backend build and tests
         run: mvn clean verify
+
+      - name: Upload backend test reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: backend-test-reports
+          path: target/surefire-reports/
 
       # Docker steps only run on push to master, not PRs
       - name: Log in to Docker Hub

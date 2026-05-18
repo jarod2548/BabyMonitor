@@ -1,5 +1,8 @@
 package org.babymonitor.Account.service;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
 import org.babymonitor.Account.model.Account;
 import org.babymonitor.Account.repository.AccountRepository;
 import org.junit.jupiter.api.Test;
@@ -9,37 +12,32 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
 class AccountServiceTest {
 
-    @Mock
-    private AccountRepository repository;
+  @Mock private AccountRepository repository;
 
-    @InjectMocks
-    private AccountService accountService;
+  @InjectMocks private AccountService accountService;
 
-    @Test
-    void createAccount_ShouldHashPasswordAndSaveAccount() {
-        Account account = new Account("testuser", "test@mail.com", "password123", "USER");
+  @Test
+  void createAccount_ShouldHashPasswordAndSaveAccount() {
+    Account account = new Account("testuser", "test@mail.com", "password123", "USER");
 
-        when(repository.save(any(Account.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    when(repository.save(any(Account.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
-        Account result = accountService.createAccount(account);
+    Account result = accountService.createAccount(account);
 
-        ArgumentCaptor<Account> captor = ArgumentCaptor.forClass(Account.class);
-        verify(repository, times(1)).save(captor.capture());
+    ArgumentCaptor<Account> captor = ArgumentCaptor.forClass(Account.class);
+    verify(repository, times(1)).save(captor.capture());
 
-        Account savedAccount = captor.getValue();
+    Account savedAccount = captor.getValue();
 
-        assertNotNull(result);
-        assertEquals("testuser", savedAccount.getUsername());
-        assertEquals("test@mail.com", savedAccount.getEmail());
-        assertEquals("USER", savedAccount.getRole());
+    assertNotNull(result);
+    assertEquals("testuser", savedAccount.getUsername());
+    assertEquals("test@mail.com", savedAccount.getEmail());
+    assertEquals("USER", savedAccount.getRole());
 
-        assertNotEquals("password123", savedAccount.getPassword());
-        assertTrue(savedAccount.getPassword().startsWith("$argon2"));
-    }
+    assertNotEquals("password123", savedAccount.getPassword());
+    assertTrue(savedAccount.getPassword().startsWith("$argon2"));
+  }
 }

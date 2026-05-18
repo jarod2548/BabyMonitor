@@ -1,7 +1,7 @@
 package org.babymonitor.Course.api;
 
+import jakarta.validation.Valid;
 import java.util.List;
-
 import org.babymonitor.Course.model.Antwoord;
 import org.babymonitor.Course.model.AntwoordDTO;
 import org.babymonitor.Course.model.AntwoordResponseDTO;
@@ -15,37 +15,31 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import jakarta.validation.Valid;
-
 @Controller
 public class AntwoordController {
 
-    private final AntwoordService antwoordService;
+  private final AntwoordService antwoordService;
 
-    public AntwoordController(AntwoordService antwoordService) {
-        this.antwoordService = antwoordService;
-    }
+  public AntwoordController(AntwoordService antwoordService) {
+    this.antwoordService = antwoordService;
+  }
 
-    @PostMapping("/teacher/antwoord")
-    public ResponseEntity<AntwoordResponseDTO> maakAntwoord(
-            @RequestBody @Valid AntwoordDTO dto,
-            @AuthenticationPrincipal UserPrincipal user) {
+  @PostMapping("/teacher/antwoord")
+  public ResponseEntity<AntwoordResponseDTO> maakAntwoord(
+      @RequestBody @Valid AntwoordDTO dto, @AuthenticationPrincipal UserPrincipal user) {
 
-        Antwoord saved = antwoordService.maakAntwoord(dto.naarModel(), dto.naarModel().getId());
+    Antwoord saved = antwoordService.maakAntwoord(dto.naarModel(), dto.naarModel().getId());
 
-        return ResponseEntity.ok(new AntwoordResponseDTO(saved));
-    }
+    return ResponseEntity.ok(new AntwoordResponseDTO(saved));
+  }
 
-    @GetMapping("/course/{id}/antwoorden")
-    public ResponseEntity<List<AntwoordResponseDTO>> leesAntwoorden(
-            @PathVariable Long id) {
+  @GetMapping("/course/{id}/antwoorden")
+  public ResponseEntity<List<AntwoordResponseDTO>> leesAntwoorden(@PathVariable Long id) {
 
-        List<Antwoord> antwoorden = antwoordService.leesAntwoordenVanCourse(id);
+    List<Antwoord> antwoorden = antwoordService.leesAntwoordenVanCourse(id);
 
-        List<AntwoordResponseDTO> response = antwoorden.stream()
-                .map(AntwoordResponseDTO::new)
-                .toList();
+    List<AntwoordResponseDTO> response = antwoorden.stream().map(AntwoordResponseDTO::new).toList();
 
-        return ResponseEntity.ok(response);
-    }
+    return ResponseEntity.ok(response);
+  }
 }

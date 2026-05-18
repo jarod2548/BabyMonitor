@@ -4,25 +4,23 @@ import jakarta.validation.constraints.NotNull;
 
 public class ControleAntwoordDTO {
 
-    @NotNull
-    private Long vraagId;
+  @NotNull private Long vraagId;
 
-    @NotNull
-    private Long antwoordId;
+  @NotNull private Long antwoordId;
 
-    public Long getVraagId() {
-        return vraagId;
-    }
+  public Long getVraagId() {
+    return vraagId;
+  }
 
-    public void setVraagId(Long vraagId) {
-        this.vraagId = vraagId;
-    }
+  public void setVraagId(Long vraagId) {
+    this.vraagId = vraagId;
+  }
 
-    public Long getAntwoordId() {
-        return antwoordId;
-    }
+  public Long getAntwoordId() {
+    return antwoordId;
+  }
 
-    public void setAntwoordId(Long antwoordId) {
-        this.antwoordId = antwoordId;
-    }
+  public void setAntwoordId(Long antwoordId) {
+    this.antwoordId = antwoordId;
+  }
 }

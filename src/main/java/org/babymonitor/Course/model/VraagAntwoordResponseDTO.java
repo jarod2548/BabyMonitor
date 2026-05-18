@@ -6,15 +6,15 @@ public class VraagAntwoordResponseDTO {
     private Long antwoordId;
 
 
-    public VraagAntwoordResponseDTO(VraagAntwoord model){
+  public VraagAntwoordResponseDTO(VraagAntwoord model) {
 
         vraagId = model.getVraag().getId();
         antwoordId = model.getAntwoord().getId();
     }
 
-    public Long getVraagId() {
-        return vraagId;
-    }
+  public Long getVraagId() {
+    return vraagId;
+  }
 
     public Long getAntwoordId() {
         return antwoordId;

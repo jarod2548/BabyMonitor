@@ -5,60 +5,57 @@ import jakarta.validation.constraints.*;
 // =========DTO=============//
 public class AccountDTO {
 
-    @NotNull
-    private String username;
+  @NotNull private String username;
 
-    @NotNull
-    private String email;
+  @NotNull private String email;
 
-    @NotNull
-    private String password;
+  @NotNull private String password;
 
+  private String roles;
 
-    private String roles;
+  // standard constructor
+  public AccountDTO(String name, String mail, String pswrd, String role) {
+    username = name;
+    email = mail;
+    password = pswrd;
+    roles = role;
+  }
 
-    // standard constructor
-    public AccountDTO(String name, String mail, String pswrd, String role) {
-        username = name;
-        email = mail;
-        password = pswrd;
-        roles = role;
-    }
+  // setters
+  public void setUsername(String name) {
+    username = name;
+  }
 
-    // setters
-    public void setUsername(String name) {
-        username = name;
-    }
+  public void setEmail(String mail) {
+    email = mail;
+  }
 
-    public void setEmail(String mail) {
-        email = mail;
-    }
+  public void setPassword(String pswrd) {
+    password = pswrd;
+  }
 
-    public void setPassword(String pswrd) {
-        password = pswrd;
-    }
+  public void setRoles(String role) {
+    roles = role;
+  }
 
-    public void setRoles(String role) {
-        roles = role;
-    }
+  // getters
+  public String getUsername() {
+    return username;
+  }
 
-    // getters
-    public String getUsername() {
-        return username;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getRoles() {
+    return roles;
+  }
 
-    public String getRoles() {
-        return roles;
-    }
+  public Account convert() {
+    return new Account(this.username, this.email, this.password, "USER");
+  }
 
-    public Account convert() {
-        return new Account(this.username, this.email, this.password, "USER");
-    }
-    public Account convertTeacher(){
-        return new Account(this.username, this.email, this.password, "TEACHER");
-    }
+  public Account convertTeacher() {
+    return new Account(this.username, this.email, this.password, "TEACHER");
+  }
 }

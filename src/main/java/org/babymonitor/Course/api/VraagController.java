@@ -1,6 +1,8 @@
 package org.babymonitor.Course.api;
 
 import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import org.babymonitor.Course.model.*;
 import org.babymonitor.Course.service.VraagService;
 import org.babymonitor.Security.UserPrincipal;
@@ -9,9 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class VraagController {

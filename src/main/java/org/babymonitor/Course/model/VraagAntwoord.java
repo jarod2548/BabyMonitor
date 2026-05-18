@@ -18,8 +18,6 @@ public class VraagAntwoord {
   @JoinColumn(name = "antwoord_id")
   private Antwoord antwoord;
 
-  @Column(name = "correct")
-  private boolean correct;
 
   public VraagAntwoord() {}
 
@@ -46,13 +44,5 @@ public class VraagAntwoord {
 
   public void setAntwoord(Antwoord antwoord) {
     this.antwoord = antwoord;
-  }
-
-  public boolean isCorrect() {
-    return correct;
-  }
-
-  public void setCorrect(boolean correct) {
-    this.correct = correct;
   }
 }

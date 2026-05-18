@@ -6,42 +6,53 @@ import jakarta.persistence.*;
 @Table(name = "vraag_antwoord")
 public class VraagAntwoord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "vraag_id")
-    private Vraag vraag;
+  @ManyToOne
+  @JoinColumn(name = "vraag_id")
+  private Vraag vraag;
 
-    @ManyToOne
-    @JoinColumn(name = "antwoord_id")
-    private Antwoord antwoord;
+  @ManyToOne
+  @JoinColumn(name = "antwoord_id")
+  private Antwoord antwoord;
 
-    public VraagAntwoord() {}
+  @Column(name = "correct")
+  private boolean correct;
 
-    public VraagAntwoord(Vraag vraag, Antwoord antwoord) {
-        this.vraag = vraag;
-        this.antwoord = antwoord;
-    }
+  public VraagAntwoord() {}
 
-    public Long getId() {
-        return id;
-    }
+  public VraagAntwoord(Vraag vraag, Antwoord antwoord) {
+    this.vraag = vraag;
+    this.antwoord = antwoord;
+  }
 
-    public Vraag getVraag() {
-        return vraag;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setVraag(Vraag vraag) {
-        this.vraag = vraag;
-    }
+  public Vraag getVraag() {
+    return vraag;
+  }
 
-    public Antwoord getAntwoord() {
-        return antwoord;
-    }
+  public void setVraag(Vraag vraag) {
+    this.vraag = vraag;
+  }
 
-    public void setAntwoord(Antwoord antwoord) {
-        this.antwoord = antwoord;
-    }
+  public Antwoord getAntwoord() {
+    return antwoord;
+  }
+
+  public void setAntwoord(Antwoord antwoord) {
+    this.antwoord = antwoord;
+  }
+
+  public boolean isCorrect() {
+    return correct;
+  }
+
+  public void setCorrect(boolean correct) {
+    this.correct = correct;
+  }
 }

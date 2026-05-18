@@ -2,66 +2,68 @@ package org.babymonitor.Course.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
 @Table(name = "vraag")
 public class Vraag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "tekst")
-    private String tekst;
-    @Column(name = "order")
-    private int order;
-    private Long courseID;
-    @ManyToOne
-    @JoinColumn(name = "course")
-    private Course course;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    public Vraag(String Tekst){
-        tekst = Tekst;
-    }
+  @Column(name = "tekst")
+  private String tekst;
 
-    public Vraag(){}
+  @Column(name = "order")
+  private int order;
 
-    public String getTekst() {
-        return tekst;
-    }
+  private Long courseID;
 
-    public void setTekst(String tekst) {
-        this.tekst = tekst;
-    }
+  @ManyToOne
+  @JoinColumn(name = "course")
+  private Course course;
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+  public Vraag(String Tekst) {
+    tekst = Tekst;
+  }
 
-    public Course getCourse() {
-        return course;
-    }
+  public Vraag() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public String getTekst() {
+    return tekst;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public void setTekst(String tekst) {
+    this.tekst = tekst;
+  }
 
-    public void setOrder(int order) {
-        this.order = order;
-    }
+  public void setCourse(Course course) {
+    this.course = course;
+  }
 
-    public int getOrder() {
-        return order;
-    }
+  public Course getCourse() {
+    return course;
+  }
 
-    public void setCourseID(Long courseID) {
-        this.courseID = courseID;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Long getCourseID() {
-        return courseID;
-    }
+  public Long getId() {
+    return id;
+  }
+
+  public void setOrder(int order) {
+    this.order = order;
+  }
+
+  public int getOrder() {
+    return order;
+  }
+
+  public void setCourseID(Long courseID) {
+    this.courseID = courseID;
+  }
+
+  public Long getCourseID() {
+    return courseID;
+  }
 }

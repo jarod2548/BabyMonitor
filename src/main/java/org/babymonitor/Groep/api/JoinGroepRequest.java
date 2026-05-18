@@ -2,16 +2,15 @@ package org.babymonitor.Groep.api;
 
 public class JoinGroepRequest {
 
-    private String groepId;
+  private String groepId;
 
-    public JoinGroepRequest() {
-    }
+  public JoinGroepRequest() {}
 
-    public String getGroepId() {
-        return groepId;
-    }
+  public String getGroepId() {
+    return groepId;
+  }
 
-    public void setGroepId(String groepId) {
-        this.groepId = groepId;
-    }
+  public void setGroepId(String groepId) {
+    this.groepId = groepId;
+  }
 }

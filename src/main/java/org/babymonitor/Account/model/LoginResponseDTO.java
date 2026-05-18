@@ -3,31 +3,32 @@ package org.babymonitor.Account.model;
 import org.babymonitor.Security.UserPrincipal;
 
 public class LoginResponseDTO {
-    private String username;
-    private String role;
+  private String username;
+  private String role;
 
-    public LoginResponseDTO(Account account){
-        username = account.getUsername();
-        role = account.getRole();
-    }
-    public LoginResponseDTO(UserPrincipal user) {
-        this.username = user.getUsername();
-        this.role = user.getRole();
-    }
+  public LoginResponseDTO(Account account) {
+    username = account.getUsername();
+    role = account.getRole();
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public LoginResponseDTO(UserPrincipal user) {
+    this.username = user.getUsername();
+    this.role = user.getRole();
+  }
 
-    public String getRole() {
-        return role;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
+  public String getRole() {
+    return role;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public void setRole(String role) {
+    this.role = role;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
 }

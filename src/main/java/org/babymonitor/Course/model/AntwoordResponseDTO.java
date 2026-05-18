@@ -2,11 +2,19 @@ package org.babymonitor.Course.model;
 
 public class AntwoordResponseDTO {
 
-    private String tekst;
-    private Long id;
+  private String tekst;
+  private Long id;
 
-    public AntwoordResponseDTO(Antwoord model){
-        tekst = model.getTekst();
-        id = model.getId();
-    }
+  public AntwoordResponseDTO(Antwoord model) {
+    tekst = model.getTekst();
+    id = model.getId();
+  }
+
+  public String getTekst() {
+    return tekst;
+  }
+
+  public Long getId() {
+    return id;
+  }
 }

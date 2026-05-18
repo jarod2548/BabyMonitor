@@ -2,50 +2,42 @@ package org.babymonitor.Course.model;
 
 public class VraagAntwoordResponseDTO {
 
-    private Long vraagId;
-    private String vraagTekst;
+  private Long vraagId;
+  private String vraagTekst;
 
-    private Long antwoordId;
-    private String antwoordTekst;
+  private Long antwoordId;
+  private String antwoordTekst;
 
-    public VraagAntwoordResponseDTO(VraagAntwoord model){
+  private boolean correct;
 
-        vraagId = model.getVraag().getId();
-        vraagTekst = model.getVraag().getTekst();
+  public VraagAntwoordResponseDTO(VraagAntwoord model) {
 
-        antwoordId = model.getAntwoord().getId();
-        antwoordTekst = model.getAntwoord().getTekst();
-    }
+    vraagId = model.getVraag().getId();
+    vraagTekst = model.getVraag().getTekst();
 
-    public Long getVraagId() {
-        return vraagId;
-    }
+    antwoordId = model.getAntwoord().getId();
+    antwoordTekst = model.getAntwoord().getTekst();
 
-    public void setVraagId(Long vraagId) {
-        this.vraagId = vraagId;
-    }
+    correct = model.isCorrect();
+  }
 
-    public String getVraagTekst() {
-        return vraagTekst;
-    }
+  public Long getVraagId() {
+    return vraagId;
+  }
 
-    public void setVraagTekst(String vraagTekst) {
-        this.vraagTekst = vraagTekst;
-    }
+  public String getVraagTekst() {
+    return vraagTekst;
+  }
 
-    public Long getAntwoordId() {
-        return antwoordId;
-    }
+  public Long getAntwoordId() {
+    return antwoordId;
+  }
 
-    public void setAntwoordId(Long antwoordId) {
-        this.antwoordId = antwoordId;
-    }
+  public String getAntwoordTekst() {
+    return antwoordTekst;
+  }
 
-    public String getAntwoordTekst() {
-        return antwoordTekst;
-    }
-
-    public void setAntwoordTekst(String antwoordTekst) {
-        this.antwoordTekst = antwoordTekst;
-    }
+  public boolean isCorrect() {
+    return correct;
+  }
 }

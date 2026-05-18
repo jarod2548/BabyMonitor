@@ -5,65 +5,53 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "vraag")
 public class Vraag {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "tekst")
+    private String tekst;
+    @Column(name = "volgorde")
+    private int volgorde;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
-  @Column(name = "tekst")
-  private String tekst;
+    public Vraag(String Tekst){
+        tekst = Tekst;
+    }
 
-  @Column(name = "order")
-  private int order;
+    public Vraag(){}
 
-  private Long courseID;
+    public String getTekst() {
+        return tekst;
+    }
 
-  @ManyToOne
-  @JoinColumn(name = "course")
-  private Course course;
+    public void setTekst(String tekst) {
+        this.tekst = tekst;
+    }
 
-  public Vraag(String Tekst) {
-    tekst = Tekst;
-  }
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
-  public Vraag() {}
+    public Course getCourse() {
+        return course;
+    }
 
-  public String getTekst() {
-    return tekst;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public void setTekst(String tekst) {
-    this.tekst = tekst;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setCourse(Course course) {
-    this.course = course;
-  }
+    public void setVolgorde(int volgorde) {
+        this.volgorde = volgorde;
+    }
 
-  public Course getCourse() {
-    return course;
-  }
+    public int getVolgorde() {
+        return volgorde;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setOrder(int order) {
-    this.order = order;
-  }
-
-  public int getOrder() {
-    return order;
-  }
-
-  public void setCourseID(Long courseID) {
-    this.courseID = courseID;
-  }
-
-  public Long getCourseID() {
-    return courseID;
-  }
 }

@@ -15,51 +15,70 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class VraagController {
 
-  private final VraagService vraagService;
+    private final VraagService vraagService;
 
-  public VraagController(VraagService vraagService) {
-    this.vraagService = vraagService;
-  }
-
-  @PostMapping("/teacher/vraag")
-  public ResponseEntity<VraagResponseDTO> maakVraag(
-      @RequestBody @Valid VraagDTO dto, @AuthenticationPrincipal UserPrincipal user) {
-
-    Vraag saved = vraagService.maakVraag(dto.naarModel());
-
-    return ResponseEntity.status(HttpStatus.CREATED).body(new VraagResponseDTO(saved));
-  }
-
-  @GetMapping("/user/vraag/{courseId}")
-  public ResponseEntity<List<VraagResponseDTO>> leesVragen(
-      @AuthenticationPrincipal UserPrincipal user, @PathVariable Long courseId) {
-
-    List<Vraag> resultaten = vraagService.leesVragen(courseId);
-
-    List<VraagResponseDTO> response = new ArrayList<>();
-
-    for (Vraag v : resultaten) {
-      response.add(new VraagResponseDTO(v));
+    public VraagController(VraagService vraagService) {
+        this.vraagService = vraagService;
     }
 
-    return ResponseEntity.ok(response);
-  }
+    @PostMapping("/teacher/vraag")
+    public ResponseEntity<VraagResponseDTO> maakVraag(
+            @RequestBody
+            @Valid
+            VraagDTO dto,
 
-  @PostMapping("/teacher/vraag-antwoord")
-  public ResponseEntity<VraagAntwoordResponseDTO> maakVraagAntwoord(
-      @RequestBody @Valid VraagAntwoordDTO dto) {
+            @AuthenticationPrincipal
+            UserPrincipal user){
 
-    VraagAntwoord saved =
-        vraagService.maakVraagAntwoord(dto.getVraagId(), dto.getAntwoordId(), dto.isCorrect());
+        Vraag saved = vraagService.maakVraag(dto.naarModel(), dto.getCourseID());
 
-    return ResponseEntity.status(HttpStatus.CREATED).body(new VraagAntwoordResponseDTO(saved));
-  }
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new VraagResponseDTO(saved));
+    }
 
-  @PostMapping("/antwoord/check")
-  public ResponseEntity<Boolean> controleerAntwoord(@RequestBody @Valid ControleAntwoordDTO dto) {
+    @GetMapping("/user/vraag/{courseId}/{order}")
+    public ResponseEntity<VraagResponseDTO> leesVragen(
+            @AuthenticationPrincipal UserPrincipal user,
+            @PathVariable Long courseId,
+            @PathVariable int order){
 
-    boolean correct = vraagService.controleerAntwoord(dto.getVraagId(), dto.getAntwoordId());
+        Vraag resultaat = vraagService.leesVraag(courseId, order);
 
-    return ResponseEntity.ok(correct);
-  }
+        return ResponseEntity.ok(new VraagResponseDTO(resultaat));
+    }
+
+    @PostMapping("/teacher/vraag-antwoord")
+    public ResponseEntity<VraagAntwoordResponseDTO> maakVraagAntwoord(
+            @RequestBody
+            @Valid
+            VraagAntwoordDTO dto
+    ) {
+
+        VraagAntwoord saved =
+                vraagService.maakVraagAntwoord(
+                        dto.getVraagId(),
+                        dto.getAntwoordId()
+                );
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new VraagAntwoordResponseDTO(saved));
+    }
+
+    @PostMapping("/antwoord/check")
+    public ResponseEntity<Boolean> controleerAntwoord(
+            @RequestBody
+            @Valid
+            ControleAntwoordDTO dto
+    ){
+
+        boolean correct =
+                vraagService.controleerAntwoord(
+                        dto.getVraagId(),
+                        dto.getAntwoordId()
+                );
+
+        return ResponseEntity.ok(correct);
+    }
 }

@@ -10,70 +10,73 @@ import jakarta.persistence.Table;
 @Table(name = "users")
 public class Account {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "naam")
-    private String username;
-    @Column(name = "email")
-    private String email;
-    @Column(name = "wachtwoord")
-    private String password;
-    @Column(name = "rol")
-    private String roles;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    // standard constructor
-    public Account(String name, String mail, String pswrd, String role) {
-        username = name;
-        email = mail;
-        password = pswrd;
-        roles = role;
-    }
+  @Column(name = "naam")
+  private String username;
 
-    public Account(String Email, String password){
-        email = Email;
-        this.password = password;
-    }
+  @Column(name = "email")
+  private String email;
 
-    public Account(){}
+  @Column(name = "wachtwoord")
+  private String password;
 
+  @Column(name = "rol")
+  private String roles;
 
-    // setters
-    public void setUsername(String name) {
-        username = name;
-    }
+  // standard constructor
+  public Account(String name, String mail, String pswrd, String role) {
+    username = name;
+    email = mail;
+    password = pswrd;
+    roles = role;
+  }
 
-    public void setEmail(String mail) {
-        email = mail;
-    }
+  public Account(String Email, String password) {
+    email = Email;
+    this.password = password;
+  }
 
-    public void setPassword(String pswrd) {
-        password = pswrd;
-    }
+  public Account() {}
 
-    public void setRole(String role) {
-        roles = role;
-    }
+  // setters
+  public void setUsername(String name) {
+    username = name;
+  }
 
-    // getters
-    public long getId() {
-        return id;
-    }
+  public void setEmail(String mail) {
+    email = mail;
+  }
 
-    public String getUsername() {
-        return username;
-    }
-    //yeet
-    public String getEmail() {
-        return email;
-    }
+  public void setPassword(String pswrd) {
+    password = pswrd;
+  }
 
-    public String getRole() {
-        return roles;
-    }
+  public void setRole(String role) {
+    roles = role;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  // getters
+  public long getId() {
+    return id;
+  }
 
+  public String getUsername() {
+    return username;
+  }
+
+  // yeet
+  public String getEmail() {
+    return email;
+  }
+
+  public String getRole() {
+    return roles;
+  }
+
+  public String getPassword() {
+    return password;
+  }
 }

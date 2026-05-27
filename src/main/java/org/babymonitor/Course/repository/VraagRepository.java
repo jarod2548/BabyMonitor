@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface VraagRepository extends JpaRepository<Vraag, Long> {
     long countByCourse_Id(Long courseID);
-    List<Vraag> findByCourse_IdOrderByOrderAsc(Long courseID);
+    Vraag findByCourse_IdAndVolgorde(Long courseId, int order);
 }

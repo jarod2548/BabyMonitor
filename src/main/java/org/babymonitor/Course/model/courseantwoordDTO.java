@@ -2,18 +2,18 @@ package org.babymonitor.Course.model;
 
 import jakarta.validation.constraints.NotNull;
 
-public class ControleAntwoordDTO {
+public class courseantwoordDTO {
 
-  @NotNull private Long vraagId;
+  @NotNull private Long courseId;
 
   @NotNull private Long antwoordId;
 
-  public Long getVraagId() {
-    return vraagId;
+  public Long getCourseId() {
+    return courseId;
   }
 
-  public void setVraagId(Long vraagId) {
-    this.vraagId = vraagId;
+  public void setCourseId(Long courseId) {
+    this.courseId = courseId;
   }
 
   public Long getAntwoordId() {

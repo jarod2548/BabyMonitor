@@ -1,57 +1,50 @@
 package org.babymonitor.Course.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "antwoord")
 public class Antwoord {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(name = "tekst")
-    private String tekst;
+  @Column(name = "tekst")
+  private String tekst;
 
-    @ManyToOne
-    @JoinColumn(name = "course")
-    private Course course;
+  @ManyToMany(mappedBy = "antwoorden")
+  private Set<Course> courses = new HashSet<>();
 
-    public Antwoord() {
-    }
+  public Antwoord(String Tekst) {
+    tekst = Tekst;
+  }
 
-    public Antwoord(String tekst){
-        this.tekst = tekst;
-    }
+  public Antwoord() {}
 
-    public void setTekst(String tekst) {
-        this.tekst = tekst;
-    }
+  public void setTekst(String tekst) {
+    this.tekst = tekst;
+  }
 
-    public String getTekst() {
-        return tekst;
-    }
+  public String getTekst() {
+    return tekst;
+  }
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public Course getCourse() {
-        return course;
-    }
+  public Set<Course> getCourses() {
+    return courses;
+  }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+  public void setCourses(Set<Course> courses) {
+    this.courses = courses;
+  }
 }

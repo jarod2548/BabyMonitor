@@ -1,8 +1,6 @@
 package org.babymonitor.Course.api;
 
 import jakarta.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import org.babymonitor.Course.model.*;
 import org.babymonitor.Course.service.VraagService;
 import org.babymonitor.Security.UserPrincipal;

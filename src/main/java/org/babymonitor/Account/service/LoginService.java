@@ -2,6 +2,7 @@ package org.babymonitor.Account.service;
 
 import org.babymonitor.Account.model.Account;
 import org.babymonitor.Account.repository.AccountRepository;
+import org.babymonitor.Exceptions.InvalidCredentialsException;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,9 +21,9 @@ public class LoginService {
     Account account =
         repository
             .findByEmail(model.getEmail())
-            .orElseThrow(() -> new RuntimeException("User not found"));
+            .orElseThrow(() -> new InvalidCredentialsException("User not found"));
     if (!encoder.matches(model.getPassword(), account.getPassword())) {
-      throw new RuntimeException("Invalid password");
+      throw new InvalidCredentialsException("Invalid password");
     }
 
     return account;

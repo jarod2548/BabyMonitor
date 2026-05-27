@@ -28,7 +28,7 @@ public class AntwoordController {
   public ResponseEntity<AntwoordResponseDTO> maakAntwoord(
       @RequestBody @Valid AntwoordDTO dto, @AuthenticationPrincipal UserPrincipal user) {
 
-    Antwoord saved = antwoordService.maakAntwoord(dto.naarModel(), dto.naarModel().getId());
+    Antwoord saved = antwoordService.maakAntwoord(dto.naarModel(), dto.getCourseID());
 
     return ResponseEntity.ok(new AntwoordResponseDTO(saved));
   }

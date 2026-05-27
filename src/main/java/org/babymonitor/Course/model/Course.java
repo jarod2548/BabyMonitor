@@ -16,7 +16,7 @@ public class Course {
 
   @ManyToMany
   @JoinTable(
-      name = "courseantwoord",
+      name = "course_antwoord",
       joinColumns = @JoinColumn(name = "course_id"),
       inverseJoinColumns = @JoinColumn(name = "antwoord_id"))
   private Set<Antwoord> antwoorden = new HashSet<>();

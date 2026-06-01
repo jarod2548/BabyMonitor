@@ -1,9 +1,12 @@
 package org.babymonitor.Course.service;
 
 import java.util.List;
+
+import jakarta.persistence.EntityNotFoundException;
 import org.babymonitor.Course.model.*;
 import org.babymonitor.Course.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CourseService {
@@ -21,6 +24,17 @@ public class CourseService {
     return saved;
   }
 
+  @Transactional
+  public void voegAntwoordToe(Long courseID, Antwoord antwoord){
+    Course course = courseRepository.findById(courseID)
+            .orElseThrow(() ->
+                    new EntityNotFoundException("Course not found"));
+
+    course.getAntwoorden().add(antwoord);
+
+    courseRepository.save(course);
+  }
+
   public List<Course> leesCourses() {
     return courseRepository.findAll();
   }
@@ -29,6 +43,7 @@ public class CourseService {
     Course result = courseRepository.getReferenceById(courseID);
     return result;
   }
+
 
   public void linkantwoordentocourse(Long courseID, Long antwoordID) {
     Course course =

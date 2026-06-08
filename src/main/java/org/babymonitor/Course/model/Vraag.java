@@ -1,6 +1,7 @@
 package org.babymonitor.Course.model;
 
 import jakarta.persistence.*;
+import org.babymonitor.CTGdata;
 
 @Entity
 @Table(name = "vraag")
@@ -15,6 +16,9 @@ public class Vraag {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private Course course;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "ctg_data_id")
+    private CTGdata ctgData;
 
     public Vraag(String Tekst){
         tekst = Tekst;
@@ -54,4 +58,11 @@ public class Vraag {
         return volgorde;
     }
 
+    public void setCtgData(CTGdata ctgData) {
+        this.ctgData = ctgData;
+    }
+
+    public CTGdata getCtgData() {
+        return ctgData;
+    }
 }

@@ -1,37 +1,53 @@
 package org.babymonitor.connection.service;
 
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
-import org.babymonitor.Groep.model.Groep;
-import org.babymonitor.Groep.service.GroepService;
+import org.babymonitor.CTGdata;
+import org.babymonitor.connection.model.CtgCommand;
+import org.babymonitor.connection.model.Groep;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class ConnectionService {
-  private final ConcurrentMap<String, Set<String>> groepSessies = new ConcurrentHashMap<>();
-  private final GroepService groepService;
+  private final Map<String, Groep> groepen = new ConcurrentHashMap<>();
 
-  public ConnectionService(GroepService groepService) {
-    this.groepService = groepService;
-    for (String groepId : groepService.getAlleGroepIds()) {
-      groepSessies.put(groepId, ConcurrentHashMap.newKeySet());
+
+  public List<Groep> getAlleGroepen() {
+    return new ArrayList<>(groepen.values());
+  }
+
+  public Groep getOrThrow(String groepId) {
+    Groep groep = groepen.get(groepId);
+    if (groep == null) {
+      throw new IllegalArgumentException("Groep bestaat niet: " + groepId);
     }
+    return groep;
   }
 
-  public void voegToeAanGroep(String groepID, String sessieID) {
-    if (!groepService.bestaatGroep(groepID)) {
-      return;
-    }
+  public void updateBaseline(String groepId, int value) {
+    Groep groep = getOrThrow(groepId);
 
-    groepSessies.computeIfAbsent(groepID, key -> ConcurrentHashMap.newKeySet()).add(sessieID);
+    groep.getCtgdata().setHartbasis(value);
   }
 
-  public String maakGroepSessie(String sessieID) {
-    Groep groep = groepService.maakGroep(null);
-    Set<String> nieuweSessies = ConcurrentHashMap.newKeySet();
-    nieuweSessies.add(sessieID);
-    groepSessies.put(groep.getId(), nieuweSessies);
-    return groep.getId();
+  public void updateVariability(String groepId, int value) {
+    Groep groep = getOrThrow(groepId);
+
+    groep.getCtgdata().setVariabiliteit(value);
   }
+  public void triggerContraction(String groepId) {
+    Groep groep = getOrThrow(groepId);
+
+
+    //trigger contraction
+  }
+
+  public Groep maakGroep(String naam) {
+    String groepId = UUID.randomUUID().toString();
+    Groep groep = new Groep(groepId, naam, "");
+    groepen.put(groepId, groep);
+    return groep;
+  }
+
 }

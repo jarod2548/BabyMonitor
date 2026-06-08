@@ -9,6 +9,8 @@ import org.babymonitor.Course.repository.VraagAntwoordRepository;
 import org.babymonitor.Course.repository.VraagRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VraagService {
 
@@ -36,6 +38,10 @@ public class VraagService {
     public Vraag leesVraag(Long courseID, int order){
         Vraag resultaat = vraagRepository.findByCourse_IdAndVolgorde(courseID,order);
         return resultaat;
+    }
+
+    public List<Vraag> leesVragen(Long courseID){
+        return vraagRepository.findByCourse_Id(courseID);
     }
 
     public Vraag leesVraagLazy(Long vraagID){

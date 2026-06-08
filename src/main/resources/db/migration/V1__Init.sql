@@ -9,7 +9,13 @@ CREATE TABLE users (
 
 CREATE TABLE course (
     id BIGSERIAL PRIMARY KEY,
-    titel VARCHAR(100)
+    titel VARCHAR(100),
+    compleet BOOLEAN
+);
+CREATE TABLE ctg_data (
+    id BIGSERIAL PRIMARY KEY,
+    hartbasis int NOT NULL,
+    varibiliteit int NOT NULL
 );
 
 CREATE TABLE vraag (
@@ -17,10 +23,16 @@ CREATE TABLE vraag (
     tekst VARCHAR(100),
     volgorde INT,
     course_id BIGINT,
+    ctg_data_id BIGINT,
 
     CONSTRAINT fk_vraag_course
         FOREIGN KEY (course_id)
             REFERENCES course(id)
+            ON DELETE CASCADE ,
+
+    CONSTRAINT fk_vraag_ctg_data
+        FOREIGN KEY (ctg_data_id)
+            REFERENCES ctg_data(id)
             ON DELETE CASCADE
 );
 
@@ -60,3 +72,4 @@ CREATE TABLE course_antwoord (
             REFERENCES antwoord(id)
             ON DELETE CASCADE
 );
+

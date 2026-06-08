@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface VraagRepository extends JpaRepository<Vraag, Long> {
     long countByCourse_Id(Long courseID);
     Vraag findByCourse_IdAndVolgorde(Long courseId, int order);
+    List<Vraag> findByCourse_Id(Long courseID);
 }

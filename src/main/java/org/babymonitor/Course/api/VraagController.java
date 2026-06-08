@@ -10,6 +10,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class VraagController {
 
@@ -36,7 +38,7 @@ public class VraagController {
     }
 
     @GetMapping("/user/vraag/{courseId}/{order}")
-    public ResponseEntity<VraagResponseDTO> leesVragen(
+    public ResponseEntity<VraagResponseDTO> leesVraag(
             @AuthenticationPrincipal UserPrincipal user,
             @PathVariable Long courseId,
             @PathVariable int order){
@@ -44,6 +46,12 @@ public class VraagController {
         Vraag resultaat = vraagService.leesVraag(courseId, order);
 
         return ResponseEntity.ok(new VraagResponseDTO(resultaat));
+    }
+
+    @GetMapping("/user/vraag/{courseId}")
+    public ResponseEntity<List<VraagResponseDTO>> leesVragen(@PathVariable Long courseId){
+        List<Vraag> resultaat = vraagService.leesVragen(courseId);
+        return ResponseEntity.ok(resultaat.stream().map(VraagResponseDTO::new).toList());
     }
 
     @PostMapping("/teacher/vraag-antwoord")

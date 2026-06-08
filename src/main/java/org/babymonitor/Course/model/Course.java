@@ -14,6 +14,9 @@ public class Course {
   @Column(name = "titel")
   private String titel;
 
+  @Column(name = "compleet")
+  private boolean compleet;
+
   @ManyToMany
   @JoinTable(
       name = "course_antwoord",
@@ -21,8 +24,9 @@ public class Course {
       inverseJoinColumns = @JoinColumn(name = "antwoord_id"))
   private Set<Antwoord> antwoorden = new HashSet<>();
 
-  public Course(String titel) {
+  public Course(String titel, boolean IsCompleet) {
     this.titel = titel;
+    compleet = IsCompleet;
   }
 
   public Course() {}
@@ -49,5 +53,13 @@ public class Course {
 
   public void setAntwoorden(Set<Antwoord> antwoorden) {
     this.antwoorden = antwoorden;
+  }
+
+  public void setCompleet(boolean compleet) {
+    this.compleet = compleet;
+  }
+
+  public boolean isCompleet() {
+    return compleet;
   }
 }

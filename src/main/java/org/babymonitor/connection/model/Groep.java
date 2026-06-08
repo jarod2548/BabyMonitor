@@ -1,10 +1,14 @@
-package org.babymonitor.Groep.model;
+package org.babymonitor.connection.model;
+
+import org.babymonitor.CTGdata;
 
 public class Groep {
 
   private String id;
   private String naam;
   private String instructeur;
+  private long tijd = 0;
+  private CTGdata ctgdata = new CTGdata(120,15);
 
   public Groep() {}
 
@@ -36,5 +40,21 @@ public class Groep {
 
   public void setInstructeur(String instructeur) {
     this.instructeur = instructeur;
+  }
+
+  public CTGdata getCtgdata() {
+    return ctgdata;
+  }
+
+  public void setCtgdata(CTGdata ctgdata) {
+    this.ctgdata = ctgdata;
+  }
+
+  public long getTijd() {
+    return tijd;
+  }
+
+  public void setTijd(long tijd) {
+    this.tijd = tijd;
   }
 }

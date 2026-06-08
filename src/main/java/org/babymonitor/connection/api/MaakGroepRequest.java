@@ -1,4 +1,4 @@
-package org.babymonitor.Groep.api;
+package org.babymonitor.connection.api;
 
 public class MaakGroepRequest {
 

@@ -3,6 +3,8 @@ package org.babymonitor.Course.api;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import org.babymonitor.Course.model.Course;
 import org.babymonitor.Course.model.CourseDTO;
 import org.babymonitor.Course.model.CourseResponseDTO;
@@ -38,7 +40,14 @@ public class CourseController {
   @GetMapping("user/courses")
   public ResponseEntity<List<CourseResponseDTO>> leesCourses(
       @AuthenticationPrincipal UserPrincipal user) {
-    List<Course> models = courseService.leesCourses();
+
+    List<Course> models = new ArrayList<Course>();
+    if (Objects.equals(user.getRole(), "TEACHER")){
+      models = courseService.leesAlleCourses();
+    }else{
+      models = courseService.leesCourses();
+    }
+
     List<CourseResponseDTO> response = new ArrayList<CourseResponseDTO>();
     for (Course model : models) {
       response.add(new CourseResponseDTO(model));

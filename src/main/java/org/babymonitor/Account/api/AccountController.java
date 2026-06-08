@@ -15,87 +15,93 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/account")
 public class AccountController {
 
-  //
-  private final AccountService accountService;
-  private final LoginService loginService;
-  private final JWTService jwtService;
-  private final CookieService cookieService;
+    //
+    private final AccountService accountService;
+    private final LoginService loginService;
+    private final JWTService jwtService;
+    private final CookieService cookieService;
 
-  public AccountController(
-      LoginService loginService,
-      AccountService AccountService,
-      JWTService JWTService,
-      CookieService CookieService) {
-    this.loginService = loginService;
-    this.accountService = AccountService;
-    this.jwtService = JWTService;
-    this.cookieService = CookieService;
-  }
-
-  @PostMapping("/register")
-  public ResponseEntity<String> CreateAccount(@RequestBody @Valid AccountDTO account) {
-    Account savedAccount = accountService.createAccount(account.convert());
-
-    if (savedAccount != null) {
-      return ResponseEntity.status(201).body("Account created successfully");
-    } else {
-      return ResponseEntity.status(500).body("Failed to create account");
-    }
-  }
-
-  @PostMapping("/registerTeacher")
-  public ResponseEntity<String> CreateTeacherAccount(@RequestBody @Valid AccountDTO account) {
-    Account savedAccount = accountService.createAccount(account.convertTeacher());
-
-    if (savedAccount != null) {
-      return ResponseEntity.status(201).body("Account created successfully");
-    } else {
-      return ResponseEntity.status(500).body("Failed to create account");
-    }
-  }
-
-  @PostMapping("/login")
-  public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDTO) {
-    Account model = loginDTO.convert();
-    Account data = loginService.login(model);
-
-    String token = jwtService.generateToken(data);
-
-    return ResponseEntity.ok()
-        .header("Set-Cookie", cookieService.createJwtCookie(token).toString())
-        .body(new LoginResponseDTO(data));
-  }
-
-  @GetMapping("/auth")
-  public ResponseEntity<LoginResponseDTO> authorize(@AuthenticationPrincipal UserPrincipal user) {
-    if (user == null) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-    }
-    LoginResponseDTO response = new LoginResponseDTO(user);
-    return ResponseEntity.ok(response);
-  }
-
-  @PatchMapping
-  public ResponseEntity<String> changePassword(
-      @RequestBody @Valid PasswordDTO passwordDTO, @AuthenticationPrincipal UserPrincipal request) {
-    System.out.println("Got UserPrincipal: " + request);
-    Account account = accountService.findAccount(request.getId());
-
-    Account updated =
-        accountService.changePassword(
-            account, passwordDTO.getOldpassword(), passwordDTO.getNewpassword());
-
-    if (updated != null) {
-      return ResponseEntity.ok("Password changed successfully");
+    public AccountController(
+            LoginService loginService,
+            AccountService AccountService,
+            JWTService JWTService,
+            CookieService CookieService) {
+        this.loginService = loginService;
+        this.accountService = AccountService;
+        this.jwtService = JWTService;
+        this.cookieService = CookieService;
     }
 
-    return ResponseEntity.badRequest().body("Password change failed");
-  }
+    @PostMapping("/register")
+    public ResponseEntity<String> CreateAccount(@RequestBody @Valid AccountDTO account) {
+        Account savedAccount = accountService.createAccount(account.convert());
 
-  @DeleteMapping
-  public ResponseEntity<String> deleteAccount(@AuthenticationPrincipal UserPrincipal request) {
-    accountService.deleteAccount(request.getId());
+        if (savedAccount != null) {
+            return ResponseEntity.status(201).body("Account created successfully");
+        } else {
+            return ResponseEntity.status(500).body("Failed to create account");
+        }
+    }
 
-    return ResponseEntity.ok("Account deleted");
-  }
+    @PostMapping("/registerTeacher")
+    public ResponseEntity<String> CreateTeacherAccount(@RequestBody @Valid AccountDTO account) {
+        Account savedAccount = accountService.createAccount(account.convertTeacher());
+
+        if (savedAccount != null) {
+            return ResponseEntity.status(201).body("Account created successfully");
+        } else {
+            return ResponseEntity.status(500).body("Failed to create account");
+        }
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginDTO loginDTO) {
+        Account model = loginDTO.convert();
+        Account data = loginService.login(model);
+
+        String token = jwtService.generateToken(data);
+
+        return ResponseEntity.ok()
+                .header("Set-Cookie", cookieService.createJwtCookie(token).toString())
+                .body(new LoginResponseDTO(data));
+    }
+
+    @GetMapping("/auth")
+    public ResponseEntity<LoginResponseDTO> authorize(@AuthenticationPrincipal UserPrincipal user) {
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        LoginResponseDTO response = new LoginResponseDTO(user);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<meDTO> me(@AuthenticationPrincipal UserPrincipal user) {
+        Account account = accountService.findAccount(user.getId());
+        meDTO response = new meDTO(account);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping
+    public ResponseEntity<String> changePassword(
+            @RequestBody @Valid PasswordDTO passwordDTO, @AuthenticationPrincipal UserPrincipal request) {
+        System.out.println("Got UserPrincipal: " + request);
+        Account account = accountService.findAccount(request.getId());
+
+        Account updated = accountService.changePassword(
+                account, passwordDTO.getOldpassword(), passwordDTO.getNewpassword());
+
+        if (updated != null) {
+            return ResponseEntity.ok("Password changed successfully");
+        }
+
+        return ResponseEntity.badRequest().body("Password change failed");
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteAccount(@AuthenticationPrincipal UserPrincipal request) {
+        accountService.deleteAccount(request.getId());
+
+        return ResponseEntity.ok("Account deleted");
+    }
 }

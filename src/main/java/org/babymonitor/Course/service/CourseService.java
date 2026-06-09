@@ -36,6 +36,10 @@ public class CourseService {
   }
 
   public List<Course> leesCourses() {
+    return courseRepository.findByCompleet(true);
+  }
+
+  public List<Course> leesAlleCourses() {
     return courseRepository.findAll();
   }
 

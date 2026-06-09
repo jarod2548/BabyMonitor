@@ -37,13 +37,8 @@ public class JWTService {
         .compact();
   }
 
-  public boolean validateToken(String token) {
-    try {
+  public void validateToken(String token) {
       Jwts.parser().verifyWith(getSigningKey()).build().parseSignedClaims(token);
-      return true;
-    } catch (JwtException e) {
-      return false;
-    }
   }
 
   public UserPrincipal getClaims(String token) {

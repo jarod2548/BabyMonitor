@@ -1,20 +1,21 @@
 package org.babymonitor.Course.model;
 
 import org.babymonitor.CTGdata;
+import org.babymonitor.Course.api.CTGdataDTO;
 
 public class VraagResponseDTO {
     private Long id;
     private int order;
     private String tekst;
     private Long courseID;
-    private CTGdata ctgData;
+    private CTGdataDTO ctgData;
 
     public VraagResponseDTO(Vraag model){
         id = model.getId();
         tekst = model.getTekst();
         courseID= model.getCourse().getId();
         order = model.getVolgorde();
-        ctgData = new CTGdata(100, 10);
+        ctgData = new CTGdataDTO(100, 10);
     }
 
     public String getTekst() {
@@ -37,7 +38,7 @@ public class VraagResponseDTO {
         return order;
     }
 
-    public CTGdata getCtgData() {
+    public CTGdataDTO getCtgData() {
         return ctgData;
     }
 

@@ -1,5 +1,6 @@
 package org.babymonitor.Security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,6 +23,19 @@ public class SecurityConfig {
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .securityMatcher("/**")
+            .exceptionHandling(ex -> ex
+                    .authenticationEntryPoint((request, response, authException) -> {
+
+                      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                      response.setContentType("application/json;charset=UTF-8");
+
+                      response.getWriter().write("""
+                {
+                  "error": "Unauthorized"
+                }
+                """);
+                    })
+            )
         .authorizeHttpRequests(
             auth ->
                 auth.requestMatchers("/user/**")

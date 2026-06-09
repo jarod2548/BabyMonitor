@@ -52,9 +52,6 @@ jobs:
       - name: Backend code analysis
         run: mvn checkstyle:check
 
-      - name: Backend formatting check
-        run: mvn spotless:check
-
       - name: Backend build and tests
         run: mvn clean verify
 

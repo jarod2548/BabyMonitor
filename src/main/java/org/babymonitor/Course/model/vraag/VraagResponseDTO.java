@@ -1,7 +1,6 @@
-package org.babymonitor.Course.model;
+package org.babymonitor.Course.model.vraag;
 
-import org.babymonitor.CTGdata;
-import org.babymonitor.Course.api.CTGdataDTO;
+import org.babymonitor.CTG.ctg.CTGdataDTO;
 
 public class VraagResponseDTO {
     private Long id;

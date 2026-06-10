@@ -1,7 +1,8 @@
-package org.babymonitor.Course.model;
+package org.babymonitor.Course.model.vraag;
 
 import jakarta.persistence.*;
-import org.babymonitor.CTGdata;
+import org.babymonitor.CTG.ctg.CTGdata;
+import org.babymonitor.Course.model.Course;
 
 @Entity
 @Table(name = "vraag")

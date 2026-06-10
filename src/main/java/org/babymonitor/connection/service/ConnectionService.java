@@ -1,7 +1,7 @@
 package org.babymonitor.connection.service;
 
-import org.babymonitor.CTGdata;
-import org.babymonitor.connection.model.CtgCommand;
+import org.babymonitor.CTG.hartslag.HartslagDoelDTO;
+import org.babymonitor.CTG.wee.WeeDoelDTO;
 import org.babymonitor.connection.model.Groep;
 import org.springframework.stereotype.Service;
 
@@ -25,22 +25,14 @@ public class ConnectionService {
     return groep;
   }
 
-  public void updateBaseline(String groepId, int value) {
+  public void updateHartslag(String groepId, HartslagDoelDTO hartslagDoelDTO) {
     Groep groep = getOrThrow(groepId);
-
-    groep.getCtgdata().setHartbasis(value);
+    groep.setHartslagDoel(hartslagDoelDTO.getAantal(), hartslagDoelDTO.getTijdDuratie());
   }
 
-  public void updateVariability(String groepId, int value) {
+  public void updateWee(String groepId, WeeDoelDTO weeDoelDTO){
     Groep groep = getOrThrow(groepId);
-
-    groep.getCtgdata().setVariabiliteit(value);
-  }
-  public void triggerContraction(String groepId) {
-    Groep groep = getOrThrow(groepId);
-
-
-    //trigger contraction
+    groep.startWee(weeDoelDTO);
   }
 
   public Groep maakGroep(String naam) {

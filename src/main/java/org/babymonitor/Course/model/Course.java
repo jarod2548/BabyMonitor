@@ -1,6 +1,8 @@
 package org.babymonitor.Course.model;
 
 import jakarta.persistence.*;
+import org.babymonitor.Course.model.antwoord.Antwoord;
+
 import java.util.HashSet;
 import java.util.Set;
 

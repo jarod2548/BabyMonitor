@@ -15,7 +15,7 @@ CREATE TABLE course (
 CREATE TABLE ctg_data (
     id BIGSERIAL PRIMARY KEY,
     hartbasis int NOT NULL,
-    varibiliteit int NOT NULL
+    variabiliteit int NOT NULL
 );
 
 CREATE TABLE vraag (

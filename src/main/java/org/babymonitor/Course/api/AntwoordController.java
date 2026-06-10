@@ -2,9 +2,9 @@ package org.babymonitor.Course.api;
 
 import jakarta.validation.Valid;
 import java.util.List;
-import org.babymonitor.Course.model.Antwoord;
-import org.babymonitor.Course.model.AntwoordDTO;
-import org.babymonitor.Course.model.AntwoordResponseDTO;
+import org.babymonitor.Course.model.antwoord.Antwoord;
+import org.babymonitor.Course.model.antwoord.AntwoordDTO;
+import org.babymonitor.Course.model.antwoord.AntwoordResponseDTO;
 import org.babymonitor.Course.service.AntwoordService;
 import org.babymonitor.Security.UserPrincipal;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +33,7 @@ public class AntwoordController {
     return ResponseEntity.ok(new AntwoordResponseDTO(saved));
   }
 
-  @GetMapping("/course/{id}/antwoorden")
+  @GetMapping("/user/antwoord/{id}")
   public ResponseEntity<List<AntwoordResponseDTO>> leesAntwoorden(@PathVariable Long id) {
 
     List<Antwoord> antwoorden = antwoordService.leesAntwoordenVanCourse(id);

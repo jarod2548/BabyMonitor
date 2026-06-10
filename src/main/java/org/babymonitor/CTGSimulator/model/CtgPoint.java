@@ -1,19 +1,17 @@
 package org.babymonitor.CTGSimulator.model;
 
-import java.time.LocalDateTime;
-
 public class CtgPoint {
     private int x;
     private Long timestamp;
     private int fhrBpm;
-    private int toco;
+    private int wee;
 
-    public CtgPoint(int X, Long Timestamp, int FhrBpm, int Toco)
+    public CtgPoint(int X, Long Timestamp, int FhrBpm, int Wee)
     {
-        x = X;
-        timestamp = Timestamp;
-        fhrBpm = FhrBpm;
-        toco= Toco;
+        this.x = X;
+        this.timestamp = Timestamp;
+        this.fhrBpm = FhrBpm;
+        this.wee = Wee;
     }
 
 
@@ -21,8 +19,8 @@ public class CtgPoint {
         return fhrBpm;
     }
 
-    public int getToco() {
-        return toco;
+    public int getWee() {
+        return wee;
     }
 
     public int getX() {

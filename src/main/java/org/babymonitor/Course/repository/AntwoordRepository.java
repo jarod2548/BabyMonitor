@@ -1,7 +1,7 @@
 package org.babymonitor.Course.repository;
 
 import java.util.List;
-import org.babymonitor.Course.model.Antwoord;
+import org.babymonitor.Course.model.antwoord.Antwoord;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,9 @@
 package org.babymonitor.connection.model;
 
-import org.babymonitor.CTGdata;
+import org.babymonitor.CTG.AcceleratieType;
+import org.babymonitor.CTG.ctg.CTGdata;
+import org.babymonitor.CTG.wee.WeeDoelDTO;
+import org.babymonitor.CTG.wee.WeeStatus;
 
 public class Groep {
 
@@ -9,6 +12,10 @@ public class Groep {
   private String instructeur;
   private long tijd = 0;
   private CTGdata ctgdata = new CTGdata(120,15);
+  private WeeStatus weeStatus = new WeeStatus(60,60, AcceleratieType.VROEG);
+
+  private int hartslagDoel;
+  private int tijdOver;
 
   public Groep() {}
 
@@ -57,4 +64,39 @@ public class Groep {
   public void setTijd(long tijd) {
     this.tijd = tijd;
   }
+
+  public int getHartslagDoel() {
+    return hartslagDoel;
+  }
+
+  public int getTijdOver() {
+    return tijdOver;
+  }
+
+  public WeeStatus getWeeStatus() {
+    return weeStatus;
+  }
+
+  public void setHartslagDoel(int hartslagDoel, int tijdOver) {
+    this.hartslagDoel = hartslagDoel;
+    this.tijdOver = tijdOver;
+  }
+  public void startWee(WeeDoelDTO doelDTO){
+    weeStatus.setValues(doelDTO);
+  }
+
+  public void tick()
+  {
+    tijd ++;
+  }
+
+  public void tickHartslagTransactie(){
+    if(tijdOver <= 0) {
+      ctgdata.setHartbasis(hartslagDoel);
+      return;
+    }
+    tijdOver -=1;
+  }
+
+
 }

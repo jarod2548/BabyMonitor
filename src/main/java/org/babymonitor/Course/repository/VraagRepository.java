@@ -1,6 +1,6 @@
 package org.babymonitor.Course.repository;
 
-import org.babymonitor.Course.model.Vraag;
+import org.babymonitor.Course.model.vraag.Vraag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

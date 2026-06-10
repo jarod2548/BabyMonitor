@@ -1,4 +1,4 @@
-package org.babymonitor.Course.model;
+package org.babymonitor.Course.model.vraag;
 
 public class VraagAntwoordResponseDTO {
 

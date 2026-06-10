@@ -1,12 +1,13 @@
-package org.babymonitor.Course.model;
+package org.babymonitor.Course.model.vraag;
 
 import jakarta.validation.constraints.NotNull;
 
-public class ControleAntwoordDTO {
+public class VraagAntwoordDTO {
 
   @NotNull private Long vraagId;
 
   @NotNull private Long antwoordId;
+
 
   public Long getVraagId() {
     return vraagId;
@@ -20,7 +21,7 @@ public class ControleAntwoordDTO {
     return antwoordId;
   }
 
-  public void setAntwoordId(Long antwoordId) {
-    this.antwoordId = antwoordId;
-  }
+    public void setAntwoordId(Long antwoordId) {
+        this.antwoordId = antwoordId;
+    }
 }

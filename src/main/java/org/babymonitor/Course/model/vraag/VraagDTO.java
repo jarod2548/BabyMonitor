@@ -1,7 +1,7 @@
-package org.babymonitor.Course.model;
+package org.babymonitor.Course.model.vraag;
 
 import jakarta.validation.constraints.NotNull;
-import org.babymonitor.Course.api.CTGdataDTO;
+import org.babymonitor.CTG.ctg.CTGdataDTO;
 
 public class VraagDTO {
   @NotNull private String tekst;

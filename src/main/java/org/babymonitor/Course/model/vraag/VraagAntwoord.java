@@ -1,6 +1,7 @@
-package org.babymonitor.Course.model;
+package org.babymonitor.Course.model.vraag;
 
 import jakarta.persistence.*;
+import org.babymonitor.Course.model.antwoord.Antwoord;
 
 @Entity
 @Table(name = "vraag_antwoord")

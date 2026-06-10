@@ -1,4 +1,4 @@
-package org.babymonitor;
+package org.babymonitor.CTG.ctg;
 
 import jakarta.persistence.*;
 

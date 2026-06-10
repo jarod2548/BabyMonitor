@@ -1,8 +1,7 @@
-package org.babymonitor.Course.api;
+package org.babymonitor.CTG.ctg;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import org.babymonitor.CTGdata;
 
 public class CTGdataDTO {
     @NotNull

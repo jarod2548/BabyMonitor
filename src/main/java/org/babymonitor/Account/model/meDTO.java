@@ -1,23 +1,22 @@
 package org.babymonitor.Account.model;
 
-import org.babymonitor.Security.UserPrincipal;
-
-public class LoginResponseDTO {
+public class meDTO {
     private String username;
+    private String email;
     private String role;
 
-    public LoginResponseDTO(Account account) {
+    public meDTO(Account account) {
         username = account.getUsername();
+        email = account.getEmail();
         role = account.getRole();
-    }
-
-    public LoginResponseDTO(UserPrincipal user) {
-        this.username = user.getUsername();
-        this.role = user.getRole();
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public String getRole() {
@@ -30,5 +29,9 @@ public class LoginResponseDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
